@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/header-footer.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/dataTables.dataTables.css">
+    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+    <title>Tabela</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="\home" style="text-decoration: none; color: inherit;">
+            <span>Voltar</span>
+        </a>
+
+        <span class="navbar-title">Chamados - Manutenção</span>
+
+        <ul class="navbar-menu">
+            <li id="nome" style="text-decoration: underline;"></li>
+            <li><a href="/"> - Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>descrição</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for chamado in chamados %}
+                <tr>
+                    <td>{{ chamado.descricao }}</td>
+                    <td> {% if chamado.status == 'ongoing' %}
+                        Em Andamento
+                        {% elif chamado.status == 'finished' %}
+                        Finalizado
+                        {% elif chamado.status == 'most-urgent' %}
+                        Muito Urgente
+                        {% elif chamado.status == 'urgent' %}
+                        Urgente
+                        {% elif chamado.status == 'common' %}
+                        Comum
+                        {% elif chamado.status == 'no-status' %}
+                        Sem Status
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+    </footer>
+    <script src="/static/js/jquery-3.7.1.js"></script>
+    <script src="/static/js/dataTables.js"></script>
+    <script>
+        $('#example').DataTable({
+            "language": {
+                "search": "Pesquisa:",
+                "entries": "Chamados",
+            }, paging: false
+        });
+
+        function filterGlobal(table) {
+            table
+                .search(
+                    $('#global_filter').val(),
+                    $('#global_regex').prop('checked'),
+                    $('#global_smart').prop('checked')
+                )
+                .draw();
+        }
+
+        var table = $('#example').DataTable();
+
+        $('input.global_filter').on('keyup click', function () {
+            filterGlobal(table);
+        });
+
+
+
+    </script>
+</body>
+
+</html>

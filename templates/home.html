@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/header-footer.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <title>Página Inicial - Manutenção</title>
+</head>
+
+<body>
+    <nav class="navbar">
+
+        <span class="navbar-title">Chamados - Manutenção</span>
+
+        <ul class="navbar-menu">
+            <li id="nome" style="text-decoration: underline;"></li>
+            <li><a href="/">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="buttons">
+            <div class="left">
+                <a href="{{ url_for('tabela') }}">
+                    <button>Todos (Tabela)</button>
+                </a>
+                <a href="{{ url_for('pedidos') }}">
+                    <button>Todos (Cartões)</button>
+                </a>
+            </div>
+            <div class="center">
+                <a href="{{ url_for('pedidosO') }}">
+                    <button>Em Andamento</button>
+                </a>
+                <a href="{{ url_for('pedidosMU') }}">
+                    <button>Alta Urgência</button>
+                </a>
+                <a href="{{ url_for('pedidosU') }}">
+                    <button>Urgente</button>
+                </a>
+                <a href="{{ url_for('pedidosC') }}">
+                    <button>Baixa Urgência</button>
+                </a>
+                <a href="{{ url_for('pedidosNS') }}" style="margin-bottom: 1vw;">
+                    <button>Sem Status</button>
+                </a>
+                <a href="{{ url_for('pedidosF') }}" style="margin-bottom: 1vw;">
+                    <button>Finalizados</button>
+                </a>
+            </div>
+            <div class="right">
+                <a href="{{ url_for('grafico') }}">
+                    <button>Gráfico</button>
+                </a>
+                <a href="#">
+                    <button>Meus Chamados</button>
+                </a>
+            </div>
+            <br>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+    </footer>
+    <script src="/static/js/script.js"></script>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        function loadAlternativeCSS() {
+            // Verifica se a altura do conteúdo é menor que a altura da janela
+            if (document.body.scrollHeight < window.innerHeight) {
+                // Cria um novo elemento link para o CSS alternativo
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = '/static/css/fix.css'; // Substitua pelo caminho do seu arquivo CSS alternativo
+
+                // Adiciona o link ao head do documento
+                document.head.appendChild(link);
+            }
+        }
+
+        // Executa a função ao carregar a página
+        loadAlternativeCSS();
+
+        // Adiciona um listener para redimensionamento da janela
+        window.addEventListener('resize', loadAlternativeCSS);
+    });
+
+</script>
+
+</html>

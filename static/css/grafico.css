@@ -1,0 +1,15 @@
+body {
+    overflow-x: hidden;
+}
+
+.chart {
+    display: flex;
+    justify-content: center;
+}
+
+#myChart {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 1000px;
+    height: 900px;
+}

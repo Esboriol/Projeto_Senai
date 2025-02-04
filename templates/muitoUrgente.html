@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/header-footer.css">
+    <link rel="stylesheet" href="/static/css/pedidos.css">
+    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+    <title>Manutenção - Muito Urgentes</title>
+</head>
+
+<body>
+        <nav class="navbar">
+            <a href="\home" style="text-decoration: none; color: inherit;"><span style="margin-right: 38vw; font-size: 1.1vw;  ">Voltar</span></a>
+            <span class="navbar-title" style="margin-right: 30vw; ">Chamados - Manutenção</span>
+            <ul class="navbar-menu">
+                <li id="nome" style="text-decoration: underline;"></li>
+                <li><a href="/">Logout</a></li>
+    
+    
+            </ul>
+        </nav>
+    
+        <div class="card-container" id="card-container">
+            <!-- Os cards serão inseridos aqui pelo JavaScript -->
+                       {% for chamado in chamados %}
+        <form action=" {{ url_for('atualizarChamado', pagina='muitoUrgente') }}" method="POST">
+
+            <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}" />
+
+                  <div class="card">
+                <p>{{ chamado.descricao }}</p>
+
+                <div class="observacoes">
+                    <textarea style="margin-bottom: 50px;" id="observacao-{{ chamado.chamado_id }}" name="observacao" placeholder="Digite suas observações">{{ chamado.observacao}}</textarea>
+                </div>
+                <br><br>
+
+                <div class="status-select">
+
+                    <select name="status" onchange="onSelectedCard('{{ chamado.chamado_id }}, {{ chamado.status }}')">
+                        <option id="{{chamado.chamado_id}}" value="ongoing" {% if chamado.status == 'ongoing' %}selected{% endif %}>Em Andamento</option>
+                        <option id="{{chamado.chamado_id}}" value="finished" {% if chamado.status == 'finished' %}selected{% endif %}>Finalizado</option>
+                        <option id="{{chamado.chamado_id}}" value="most-urgent" {% if chamado.status == 'most-urgent' %}selected{% endif %}>Muito Urgente</option>
+                        <option id="{{chamado.chamado_id}}" value="urgent" {% if chamado.status == 'urgent' %}selected{% endif %}>Urgente</option>
+                        <option id="{{chamado.chamado_id}}" value="common" {% if chamado.status == 'common' %}selected{% endif %}>Comum</option>
+                        <option id="{{chamado.chamado_id}}" value="no-status" {% if chamado.status == 'no-status' %}selected{% endif %}>Sem Status</option>
+                    </select>
+
+                    <button class="button-salvar" type="submit">Salvar</button>
+                </div>
+            </div>
+
+        </form>
+        {% endfor %}
+        </div>
+        <footer class="footer">
+            <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+        </footer>
+        <script src="/static/js/muitoUrgente.js"></script>
+
+  <script>
+        const statusColors = {
+            'ongoing': '#FFC222',
+            'finished': '#28a745',
+            'most-urgent': '#dc3545',
+            'urgent': '#ff7b07',
+            'common': '#007bff',
+            'no-status': '#6c757d'
+        };
+
+        const statusPriority = {
+            'ongoing': 1,
+            'most-urgent': 2,
+            'urgent': 3,
+            'common': 4,
+            'finished': 5,
+            'no-status': 6
+        };
+
+        function sortCards() {
+            const container = document.getElementById('card-container');
+            const forms = Array.from(container.querySelectorAll('form'));
+
+            const sortedForms = forms.sort((a, b) => {
+                const aStatus = a.querySelector('.status-select select').value;
+                const bStatus = b.querySelector('.status-select select').value;
+                return statusPriority[aStatus] - statusPriority[bStatus];
+            });
+
+            sortedForms.forEach(sortedForm => container.appendChild(sortedForm));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('card-container');
+            const cards = container.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const select = card.querySelector('.status-select select');
+
+                select.style.backgroundColor = statusColors[select.value];
+
+                select.addEventListener('change', (event) => {
+                    const newStatus = event.target.value;
+                    select.style.backgroundColor = statusColors[newStatus];
+                });
+            });
+
+            sortCards();
+        });
+
+        function onSelectedCard(id, status) {
+            // setTimeout(() => {
+            //     console.log(id, status)
+            // }, 1000);
+        }
+
+    </script>
+</body>
+</html>

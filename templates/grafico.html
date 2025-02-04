@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/reset.css">
+  <link rel="stylesheet" href="/static/css/header-footer.css">
+  <link rel="stylesheet" href="/static/css/dataTables.dataTables.css">
+  <link rel="stylesheet" href="/static/css/grafico.css">
+  <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+  <title>Gráfico</title>
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="\home" style="text-decoration: none; color: inherit;"><span
+        style="margin-right: 38vw; font-size: 1.1vw;  ">Voltar</span></a>
+
+    <span class="navbar-title" style="margin-right: 30vw; ">Chamados - Manutenção</span>
+    <ul class="navbar-menu">
+      <li id="nome" style="text-decoration: underline;"></li>
+      <li><a href="/">Logout</a></li>
+
+
+    </ul>
+  </nav>
+
+  <div class="chart">
+    <canvas id="myChart"></canvas>
+  </div>
+
+
+  <footer class="footer">
+    <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+  </footer>
+  <script src="/static/js/jquery-3.7.1.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Alex', 'Fernando', 'Isaac', 'Paulo', 'Carlos', 'Pedro'],
+      datasets: [{
+        label: 'Atendimentos Finalizados',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+        borderColor: '#ff0000',
+        backgroundColor: "rgba(255, 0, 0, 0.1)"
+      }]
+    },
+    options: {
+      responsive: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+</html>
