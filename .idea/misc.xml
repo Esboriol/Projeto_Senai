@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="Python 3.12 (projeto)" />
+    <option name="sdkName" value="Python 3.12 (Projeto_Senai)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (projeto)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Projeto_Senai)" project-jdk-type="Python SDK" />
 </project>
