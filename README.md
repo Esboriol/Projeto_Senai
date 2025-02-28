@@ -4,4 +4,4 @@
 - Login no banco de dados
 - Níveis de permissões
 - Integrar o gráfico com banco de dados
-- Adicionar foto no formulário de cadastro
+- Itegrar a foto do formulario com o banco de dados
