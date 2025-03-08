@@ -8,6 +8,9 @@ app = Flask(__name__)
 def inicial():
     return render_template("index.html")
 
+@app.route("/ts")
+def testes():
+    return render_template("/testes/teste.html")
 
 @app.route("/pedidos")
 def pedidos():
