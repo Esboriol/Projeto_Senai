@@ -1,0 +1,59 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel Simples</title>
+  <link rel="stylesheet" href="/static/css/testes/teste.css">
+  <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+</head>
+
+  <div class="comeco">
+        <a href="{{ url_for('inicial') }}">
+          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+        </a>
+        <h1>Chamados - Manutenção</h1>
+        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  </div>
+
+<body>
+  <div class="carousel">
+   <div class="carousel-track">
+  <div class="slide">
+    <a href="{{ url_for('inicial') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl1.png" alt="Imagem 1">
+        <p>Chamados</p>
+      </div>
+    </a>
+  </div>
+  <div class="slide">
+    <a href=" {{ url_for('inicial') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl2.png" alt="Imagem 2">
+        <p>Todas as Chamadas</p>
+      </div>
+    </a>
+  </div>
+  <div class="slide">
+    <a href=" {{ url_for('inicial') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl3.png" alt="Imagem 3">
+        <p>Graficos</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+    <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+    <div class="indicators">
+      <div class="indicator active" onclick="goToSlide(0)"></div>
+      <div class="indicator" onclick="goToSlide(1)"></div>
+      <div class="indicator" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+  <script src="/static/js/testes/teste.js"></script>
+</body>
+</html>
