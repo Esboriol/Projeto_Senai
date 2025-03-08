@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.comeco {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 3px solid red;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.comeco img {
+  max-width: 250px;
+  margin-left: 3%;
+  cursor: pointer;
+}
+
+.comeco h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-icon {
+  height: 65px;
+  margin-right: 3%;
+  cursor: pointer;
+}
+
+.carousel {
+  width: 80%;
+  max-width: 40%;
+  overflow: hidden;
+  position: relative;
+  background: #4b1029;
+  border-radius: 20px;
+  margin-top: 11%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  padding: 50px 0;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.indicator {
+  width: 50px;
+  height: 12px;
+  background: gray;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.active {
+  background: white;
+}
+
+.slide-content {
+  position: relative;
+  display: inline-block;
+}
+
+.slide-content img {
+  width: 100%;
+  display: block;
+  margin-left: 3%;
+}
+
+.slide-content p {
+  position: absolute;
+  top: 25%;
+  left: 67%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 55px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
