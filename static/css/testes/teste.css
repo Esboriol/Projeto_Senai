@@ -1,46 +1,7 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f4f4f4;
-}
-
-.comeco {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  padding: 10px 20px;
-  border-bottom: 3px solid red;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.comeco img {
-  max-width: 250px;
-  margin-left: 3%;
-  cursor: pointer;
-}
-
-.comeco h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.user-icon {
-  height: 65px;
-  margin-right: 3%;
-  cursor: pointer;
-}
 
 .carousel {
   width: 80%;
-  max-width: 40%;
+  max-width: 45%;
   overflow: hidden;
   position: relative;
   background: #4b1029;
@@ -64,14 +25,19 @@ body {
 
 .nav-button {
   position: absolute;
-  top: 50%;
+  top: 93%;
   transform: translateY(-50%);
-  background: white;
+  color: #686868;
+  background: transparent;
   border: none;
   padding: 10px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 30px;
   border-radius: 50%;
+}
+
+.nav-button:hover {
+    color:white
 }
 
 .prev {

@@ -1,0 +1,31 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15%;
+}
+
+.box {
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.box img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.box.red {
+    background: #d60000;
+    color: #fff;
+}
+
+p {
+    margin: 0;
+    font-weight: bold;
+}
