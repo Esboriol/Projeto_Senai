@@ -12,6 +12,10 @@ def inicial():
 def testes():
     return render_template("/testes/teste.html")
 
+@app.route("/chs")
+def chamados():
+    return render_template("/testes/chamados.html")
+
 @app.route("/pedidos")
 def pedidos():
     return render_template("pedidos.html", chamados=get_chamados_by_status(None))
