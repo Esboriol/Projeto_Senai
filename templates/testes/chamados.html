@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chamados</title>
+    <link rel="stylesheet" href="/static/css/testes/top.css">
+    <link rel="stylesheet" href="/static/css/testes/cmds.css">
+    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+</head>
+
+<div class="comeco">
+        <a href="{{ url_for('testes') }}">
+          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+        </a>
+        <h1>Chamados</h1>
+        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+</div>
+
+
+<body>
+    <div class="container">
+        <a href="{{ url_for('pedidosF') }}" style="margin-bottom: 1vw;">
+            <div class="box red">
+
+                <img src="icon-finalizados.png" alt="Finalizados">
+                <p>Finalizados</p>
+            </div>
+        </a>
+        <a href="{{ url_for('pedidosO') }}" style="margin-bottom: 1vw;">
+            <div class="box">
+                <img src="icon-andamento.png" alt="Em andamento">
+                <p>Em andamento</p>
+            </div>
+        </a>
+        <a href="{{ url_for('pedidosNS') }}" style="margin-bottom: 1vw;">
+            <div class="box">
+                <img src="icon-semstatus.png" alt="Sem status">
+                <p>Sem status</p>
+            </div>
+        </a>
+        <a href="{{ url_for('pedidosC') }}" style="margin-bottom: 1vw;">
+            <div class="box">
+                <img src="icon-baixaurgencia.png" alt="Baixa urgência">
+                <p>Baixa urgência</p>
+            </div>
+        </a>
+        <a href="{{ url_for('pedidosU') }}" style="margin-bottom: 1vw;">
+            <div class="box">
+                <img src="icon-urgente.png" alt="Urgente">
+                <p>Urgente</p>
+            </div>
+        </a>
+        <a href="{{ url_for('pedidosMU') }}" style="margin-bottom: 1vw;">
+            <div class="box">
+                <img src="icon-altaurgencia.png" alt="Alta urgência">
+                <p>Alta urgência</p>
+            </div>
+        </a>
+    </div>
+</body>
+</html>

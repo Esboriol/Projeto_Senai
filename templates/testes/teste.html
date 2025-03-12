@@ -6,14 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrossel Simples</title>
   <link rel="stylesheet" href="/static/css/testes/teste.css">
+  <link rel="stylesheet" href="/static/css/testes/top.css">
   <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
 </head>
 
   <div class="comeco">
-        <a href="{{ url_for('inicial') }}">
+        <a href="{{ url_for('testes') }}">
           <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
         </a>
-        <h1>Chamados - Manutenção</h1>
+        <h1>Home</h1>
         <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
   </div>
 
@@ -21,7 +22,7 @@
   <div class="carousel">
    <div class="carousel-track">
   <div class="slide">
-    <a href="{{ url_for('inicial') }}">
+    <a href="{{ url_for('chamados') }}">
       <div class="slide-content">
         <img src="/static/img/sl1.png" alt="Imagem 1">
         <p>Chamados</p>
