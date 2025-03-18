@@ -1,67 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/header-footer.css">
-    <link rel="stylesheet" href="/static/css/reset.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela</title>
     <link rel="stylesheet" href="/static/css/dataTables.dataTables.css">
-    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
-    <title>Tabela</title>
+  <link rel="stylesheet" href="/static/css/testes/top.css">
+  <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
 </head>
 
-<body>
-    <nav class="navbar">
-        <a href="\home" style="text-decoration: none; color: inherit;">
-            <span>Voltar</span>
+  <div class="comeco">
+        <a href="{{ url_for('home') }}">
+          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
         </a>
+        <h1>Tabela</h1>
+        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  </div>
 
-        <span class="navbar-title">Chamados - Manutenção</span>
-
-        <ul class="navbar-menu">
-            <li id="nome" style="text-decoration: underline;"></li>
-            <li><a href="/"> - Logout</a></li>
-        </ul>
-    </nav>
-
+<body>
     <div class="container">
-        <table id="example" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>descrição</th>
-                    <th>status</th>
-                </tr>
-            </thead>
-            <tbody>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>descrição</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for chamado in chamados %}
+        <tr>
+          <td>{{ chamado.descricao }}</td>
+          <td>
+            {% if chamado.status == 'ongoing' %}
+              Em Andamento
+            {% elif chamado.status == 'finished' %}
+              Finalizado
+            {% elif chamado.status == 'most-urgent' %}
+              Muito Urgente
+            {% elif chamado.status == 'urgent' %}
+              Urgente
+            {% elif chamado.status == 'common' %}
+              Comum
+            {% elif chamado.status == 'no-status' %}
+              Sem Status
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-
-                {% for chamado in chamados %}
-                <tr>
-                    <td>{{ chamado.descricao }}</td>
-                    <td> {% if chamado.status == 'ongoing' %}
-                        Em Andamento
-                        {% elif chamado.status == 'finished' %}
-                        Finalizado
-                        {% elif chamado.status == 'most-urgent' %}
-                        Muito Urgente
-                        {% elif chamado.status == 'urgent' %}
-                        Urgente
-                        {% elif chamado.status == 'common' %}
-                        Comum
-                        {% elif chamado.status == 'no-status' %}
-                        Sem Status
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
-    </footer>
+</body>
     <script src="/static/js/jquery-3.7.1.js"></script>
     <script src="/static/js/dataTables.js"></script>
     <script>
@@ -91,6 +83,5 @@
 
 
     </script>
-</body>
 
 </html>

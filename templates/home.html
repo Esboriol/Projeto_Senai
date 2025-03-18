@@ -1,96 +1,60 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/header-footer.css">
-    <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/home.css">
-    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
-
-    <title>Página Inicial - Manutenção</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel Simples</title>
+  <link rel="stylesheet" href="/static/css/testes/teste.css">
+  <link rel="stylesheet" href="/static/css/testes/top.css">
+  <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
 </head>
 
+  <div class="comeco">
+        <a href="{{ url_for('home') }}">
+          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+        </a>
+        <h1>Home</h1>
+        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  </div>
+
 <body>
-    <nav class="navbar">
+  <div class="carousel">
+   <div class="carousel-track">
+  <div class="slide">
+    <a href="{{ url_for('chamado') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl1.png" alt="Imagem 1">
+        <p>Chamados</p>
+      </div>
+    </a>
+  </div>
+  <div class="slide">
+    <a href=" {{ url_for('home') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl2.png" alt="Imagem 2">
+        <p>Todas as Chamadas</p>
+      </div>
+    </a>
+  </div>
+  <div class="slide">
+    <a href=" {{ url_for('tabela') }}">
+      <div class="slide-content">
+        <img src="/static/img/sl3.png" alt="Imagem 3">
+        <p>Graficos</p>
+      </div>
+    </a>
+  </div>
+</div>
 
-        <span class="navbar-title">Chamados - Manutenção</span>
-
-        <ul class="navbar-menu">
-            <li id="nome" style="text-decoration: underline;"></li>
-            <li><a href="/">Logout</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <div class="buttons">
-            <div class="left">
-                <a href="{{ url_for('tabela') }}">
-                    <button>Todos (Tabela)</button>
-                </a>
-                <a href="{{ url_for('pedidos') }}">
-                    <button>Todos (Cartões)</button>
-                </a>
-            </div>
-            <div class="center">
-                <a href="{{ url_for('pedidosO') }}">
-                    <button>Em Andamento</button>
-                </a>
-                <a href="{{ url_for('pedidosMU') }}">
-                    <button>Alta Urgência</button>
-                </a>
-                <a href="{{ url_for('pedidosU') }}">
-                    <button>Urgente</button>
-                </a>
-                <a href="{{ url_for('pedidosC') }}">
-                    <button>Baixa Urgência</button>
-                </a>
-                <a href="{{ url_for('pedidosNS') }}" style="margin-bottom: 1vw;">
-                    <button>Sem Status</button>
-                </a>
-                <a href="{{ url_for('pedidosF') }}" style="margin-bottom: 1vw;">
-                    <button>Finalizados</button>
-                </a>
-            </div>
-            <div class="right">
-                <a href="{{ url_for('grafico') }}">
-                    <button>Gráfico</button>
-                </a>
-                <a href="#">
-                    <button>Meus Chamados</button>
-                </a>
-            </div>
-            <br>
-        </div>
+    <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+    <div class="indicators">
+      <div class="indicator active" onclick="goToSlide(0)"></div>
+      <div class="indicator" onclick="goToSlide(1)"></div>
+      <div class="indicator" onclick="goToSlide(2)"></div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
-    </footer>
-    <script src="/static/js/script.js"></script>
+  </div>
+  <script src="/static/js/testes/teste.js"></script>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        function loadAlternativeCSS() {
-            // Verifica se a altura do conteúdo é menor que a altura da janela
-            if (document.body.scrollHeight < window.innerHeight) {
-                // Cria um novo elemento link para o CSS alternativo
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = '/static/css/fix.css'; // Substitua pelo caminho do seu arquivo CSS alternativo
-
-                // Adiciona o link ao head do documento
-                document.head.appendChild(link);
-            }
-        }
-
-        // Executa a função ao carregar a página
-        loadAlternativeCSS();
-
-        // Adiciona um listener para redimensionamento da janela
-        window.addEventListener('resize', loadAlternativeCSS);
-    });
-
-</script>
-
 </html>
