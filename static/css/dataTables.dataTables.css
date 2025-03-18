@@ -24,7 +24,7 @@
 .dt-search label {
   font-weight: bold; /* Negrito para o texto do rótulo */
   margin-right: 10px; /* Espaçamento à direita do rótulo */
-  color: rgb(13, 110, 253); /* Cor do texto do rótulo */
+  color: rgb(253 13 13);; /* Cor do texto do rótulo */
 }
 
 .dt-search input[type="search"] {
@@ -73,7 +73,7 @@ table.dataTable td {
 }
 
 table.dataTable th {
-  background-color: rgb(13, 110, 253);
+  background-color: rgb(253 13 13);;
   color: white;
   font-weight: bold;
 }
