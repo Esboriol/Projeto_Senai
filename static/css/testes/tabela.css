@@ -1,0 +1,110 @@
+/* Estilo geral para a tabela */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Elimina espaços entre as células */
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo das células */
+th, td {
+  text-align: left;
+  padding: 12px 15px;
+}
+
+/* Estilo do cabeçalho da tabela */
+th {
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase; /* Transforma texto em maiúsculas */
+}
+
+/* Alternância de cores nas linhas */
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff; /* Cor de fundo para linhas ímpares */
+}
+
+/* Efeito de hover nas linhas da tabela */
+tr:hover {
+  background-color: #ddd; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo do texto das células */
+td {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Ajuste de altura nas linhas */
+tr {
+  height: 40px; /* Ajusta a altura das linhas */
+}
+
+/* Estilo para a célula de status */
+td:nth-child(2) {
+  text-align: center;
+}
+
+/* Definições para o layout geral */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.comeco {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+h1 {
+  font-size: 2em;
+  color: #333;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+  table {
+    font-size: 12px; /* Diminui o tamanho da fonte para telas pequenas */
+  }
+
+  .comeco {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    font-size: 10px; /* Tamanho menor para telas muito pequenas */
+  }
+
+  .comeco {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+}
