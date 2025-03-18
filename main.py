@@ -16,10 +16,17 @@ def testes():
 def chamados():
     return render_template("/testes/chamados.html")
 
+@app.route("/tbs")
+def tabelas():
+    return render_template("/testes/tabela.html")
+
 @app.route("/pedidos")
 def pedidos():
     return render_template("pedidos.html", chamados=get_chamados_by_status(None))
 
+@app.route("/chamados")
+def chamado():
+    return render_template("chamados.html")
 
 @app.route("/home")
 def home():
