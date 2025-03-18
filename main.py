@@ -32,6 +32,9 @@ def chamado():
 def home():
     return render_template("home.html")
 
+@app.route("/todos")
+def todes():
+    return render_template("/test/todos.html")
 
 @app.route("/tabela")
 def tabela():
