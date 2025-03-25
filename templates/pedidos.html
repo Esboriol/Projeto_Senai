@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/header-footer.css">
+    <link rel="stylesheet" href="/static/css/testes/top.css">
     <link rel="stylesheet" href="/static/css/pedidos.css">
     <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
     <title>Controle de Manutenção</title>
 </head>
 
+<div class="comeco">
+        <a href="{{ url_for('home') }}">
+          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+        </a>
+        <h1>Pedidos</h1>
+        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+</div>
+
 <body>
-    <nav class="navbar">
-        <a href="\home" style="text-decoration: none; color: inherit;"><span
-                style="margin-right: 38vw; font-size: 1.1vw;">Voltar</span></a>
-        <span class="navbar-title" style="margin-right: 30vw;">Chamados - Manutenção</span>
-        <ul class="navbar-menu">
-            <li id="nome" style="text-decoration: underline;"></li>
-            <li><a href="/">Logout</a></li>
-        </ul>
-    </nav>
 
     <div class="card-container" id="card-container">
 
@@ -65,10 +65,6 @@
 
 
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
-    </footer>
 
     <script>
         const statusColors = {

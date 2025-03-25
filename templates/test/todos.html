@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/static/css/testes/top.css">
+    <link rel="stylesheet" href="/static/css/todos.css">
     <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
 </head>
 
@@ -16,6 +17,24 @@
 </div>
 
 <body>
+
+    <div class="container">
+        <a href="{{ url_for ('pedidos') }}">
+            <div class="box">
+                <h1 style="top: 20%; left: 45%;" class="title">Cartão</h1>
+                <img style="transform: rotate(-45deg); position: absolute; top: 40%; left: 11.8%;" src="static/img/cartao.png" alt="Ícone 1" class="image">
+            </div>
+
+        </a>
+
+        <a href="{{ url_for ('tabela') }}">
+            <div class="box">
+                <h1 style="top: 20%; left: 2%;" class="title">Tabela</h1>
+                <img style="transform: rotate(45deg); position: absolute; top: 51%; left: 58%;" src="static/img/tabela.png" alt="Ícone 2" class="image right">
+            </div>
+        </a>
+
+    </div>
 
 </body>
 </html>
