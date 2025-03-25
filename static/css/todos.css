@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55vh;
+    width: 80vw;
+}
+
+.title {
+    color: white;
+    font-size: 60px;
+    font-family: Arial, sans-serif;
+    position: absolute; /* Permite que o título seja posicionado em qualquer lugar */
+
+}
+
+.box {
+    width: 350px;
+    height: 300px;
+    background: linear-gradient(to right, #33001b, #500029);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+.image {
+    width: 120px; /* Aumentei o tamanho */
+    height: auto; /* Mantém a proporção */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Garante que a imagem não seja cortada ou distorcida */
+}
+
+
+.text {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}

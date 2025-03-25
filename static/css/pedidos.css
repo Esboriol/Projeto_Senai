@@ -1,180 +1,212 @@
+/* ------------------------------------------------------------ */
+/*                   Importando Fontes Externas                */
+/* ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+
+/* ------------------------------------------------------------ */
+/*                      Estilos Gerais do Corpo                */
+/* ------------------------------------------------------------ */
+body {
+    font-family: 'Playfair Display', serif; /* Fonte elegante */
+    background-color: #f1f6f9; /* Fundo suave e acolhedor */
+    color: #2c3e50; /* Cor de texto escuro */
+    margin: 0;
+    padding: 0;
+    line-height: 1.8; /* Espaçamento entre as linhas */
+}
+
+/* ------------------------------------------------------------ */
+/*                   Estilo do Container dos Cards             */
+/* ------------------------------------------------------------ */
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
+    gap: 40px; /* Espaçamento entre os cards */
+    padding: 60px 50px;
     justify-content: center;
-    padding-top: 1vw;
-    margin-top: 60px; /* Espaço para a navbar fixa */
+    margin-top: 80px; /* Espaço para o navbar fixo */
 }
 
+/* ------------------------------------------------------------ */
+/*                    Estilo dos Cards                        */
+/* ------------------------------------------------------------ */
 .card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    background: linear-gradient(145deg, #ffffff, #f9fafb); /* Gradiente suave */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 30px;
     text-align: center;
-    height: 350px !important;
-    width: 200px;
+    height: auto;
+    width: 320px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 300px; /* Ajuste a altura conforme necessário */
-
-    position: relative;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.observacoes textarea {
-    width: 100%; /* Usa toda a largura do card */
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    min-height: 10px; /* Altura mínima */
-    resize: vertical; /* Permite redimensionar verticalmente */
+/* Efeito de hover nos cards */
+.card:hover {
+    transform: translateY(-12px); /* Elevação sutil */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+    background: linear-gradient(145deg, #f8f9fa, #f1f6f9); /* Muda a cor ao passar o mouse */
 }
 
+/* ------------------------------------------------------------ */
+/*                    Estilo do Título do Card                 */
+/* ------------------------------------------------------------ */
+.card-title {
+    font-size: 2em;
+    color: #2980b9; /* Azul profundo */
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase; /* Título em maiúsculas */
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    transition: color 0.3s ease;
+}
+
+/* Efeito de hover no título */
+.card-title:hover {
+    color: #1f618d; /* Azul mais escuro ao passar o mouse */
+}
+
+/* ------------------------------------------------------------ */
+/*                  Estilo da Descrição do Card                */
+/* ------------------------------------------------------------ */
+.card-description {
+    font-size: 1.3em;
+    color: #34495e; /* Texto mais escuro */
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+/* ------------------------------------------------------------ */
+/*                Estilo dos Ícones de Edição                  */
+/* ------------------------------------------------------------ */
 .card .edit-icon {
-    font-size: 18px;
-    color: #007bff;
+    font-size: 28px; /* Ícones maiores */
+    color: #2980b9;
     cursor: pointer;
-    margin-left: 10px;
+    transition: color 0.3s ease;
 }
 
+/* Efeito de hover nos ícones */
+.card .edit-icon:hover {
+    color: #1f618d; /* Cor mais escura ao passar o mouse */
+}
+
+/* ------------------------------------------------------------ */
+/*               Estilo dos Campos de Input e Textarea         */
+/* ------------------------------------------------------------ */
 .card input, .card textarea {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 14px;
-    width: calc(100% - 30px); /* Ajusta a largura para deixar espaço para o ícone */
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 18px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 30px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    background-color: #f7f9fb; /* Fundo suave para inputs */
+    transition: background-color 0.3s ease;
 }
 
+/* Efeito de foco nos campos */
+.card input:focus, .card textarea:focus {
+    background-color: #ffffff; /* Fundo branco ao focar */
+    border-color: #2980b9; /* Borda azul ao focar */
+}
+
+/* Estilo do Textarea */
 .card textarea {
-    height: 70px;
-    resize: none;
+    height: 150px;
+    resize: none; /* Desabilita o redimensionamento */
 }
 
-.card .status {
-    margin-top: 15px;
-    padding: 5px;
-    border-radius: 5px;
-    color: #fff;
-    text-align: center; /* Adiciona alinhamento central */
-}
-
-.card .status.finished {
-    background-color: #28a745;
-}
-
-.card .status.urgent {
-    background-color: #ff7b07;
-}
-.card .status.ongoing {
-    background-color: #FFC222;
-}
-
-.card .status.most-urgent {
-    background-color: #dc3545;
-}
-
-.card .status.common {
-    background-color: #007bff;
-}
-
-.card .status.no-status {
-    background-color: #6c757d;
-}
-
-.card .status-select {
-    margin-top: 10px;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    top: 75%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-}
-
-.card .status-select select {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    cursor: pointer;
-    color: #fff;
-    background-color: #6c757d;
-}
-
-.card .status-select select.finished {
-    background-color: #28a745;
-}
-
-.card .status-select select.urgent {
-    background-color: #ff7b07;
-}
-
-.card .status-select select.ongoing {
-    background-color: #FFC222;
-}
-
-.card .status-select select.most-urgent {
-    background-color: #dc3545;
-}
-
-.card .status-select select.common {
-    background-color: #007bff;
-}
-
-.card .status-select select.no-status {
-    background-color: #6c757d;
-}
-
+/* ------------------------------------------------------------ */
+/*                    Estilo do Botão "Salvar"                */
+/* ------------------------------------------------------------ */
 .button-salvar {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.button-salvar {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #28a745;
+    padding: 20px 30px;
+    background-color: #2980b9;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     cursor: pointer;
-    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+    width: 100%; /* Botão ocupa toda a largura do card */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .button-salvar:hover {
-    background-color: #218838;
+    background-color: #1f618d;
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
 }
 
+/* ------------------------------------------------------------ */
+/*                      Estilo do Status                      */
+/* ------------------------------------------------------------ */
+.card .status {
+    margin-top: 30px;
+    padding: 18px;
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
 
+/* Cores dos status */
+.card .status.finished { background-color: #27ae60; } /* Verde */
+.card .status.urgent { background-color: #e67e22; } /* Laranja */
+.card .status.ongoing { background-color: #f39c12; } /* Amarelo */
+.card .status.most-urgent { background-color: #e74c3c; } /* Vermelho */
+.card .status.common { background-color: #2980b9; } /* Azul */
+.card .status.no-status { background-color: #7f8c8d; } /* Cinza */
+
+/* ------------------------------------------------------------ */
+/*                 Estilo do Select de Status                  */
+/* ------------------------------------------------------------ */
+.card .status-select {
+    margin-top: 20px;
+}
+
+.card .status-select select {
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #7f8c8d;
+    transition: background-color 0.3s ease;
+}
+
+.card .status-select select:hover {
+    background-color: #95a5a6; /* Cor mais clara ao passar o mouse */
+}
+
+/* ------------------------------------------------------------ */
+/*               Ajustes Gerais para Inputs e Selects           */
+/* ------------------------------------------------------------ */
+input, textarea, select {
+    font-family: 'Playfair Display', serif;
+}
+
+/* ------------------------------------------------------------ */
+/*                  Responsividade para Telas Menores         */
+/* ------------------------------------------------------------ */
 @media (max-width: 768px) {
     .card-container {
-        padding: 10px;
-        padding-top: 60px; /* Ajusta o padding para dar espaço para a navbar */
+        padding: 20px;
     }
 
     .card {
-        width: 100%;
-        max-width: 350px; /* Largura máxima para telas menores */
-    }
-}
-
-@media (max-width: 480px) {
-    .card-container {
-        padding: 10px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 300px;
+        width: 100%; /* Cards ocupam 100% da largura em telas pequenas */
     }
 }
