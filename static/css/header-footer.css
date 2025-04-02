@@ -71,15 +71,11 @@
 .footer {
     background-color: #dc3545;
     color: #fff;
-    margin-top: auto;
     text-align: center;
     padding: 10px;
+    width: 100%;
+    position: relative;
     bottom: 0;
     border-top: 1px solid #ddd;
-}
-
-.footer {
-    margin-top: auto;
-    text-align: center;
-    border-top: 1px solid #ddd;
+    margin: 0;
 }
