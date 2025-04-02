@@ -4,130 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/header-footer.css">
-    <link rel="stylesheet" href="/static/css/testes/top.css">
+    <title>Chamados Cartões</title>
     <link rel="stylesheet" href="/static/css/pedidos.css">
+    <link rel="stylesheet" href="/static/css/testes/top.css">
     <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
-    <link rel="stylesheet" href="/static/css/header-footer.css">
-    <title>Controle de Manutenção</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Pedidos</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
-</div>
-
 <body>
+        <div class="comeco">
+            <a href="{{ url_for('home') }}">
+              <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+            </a>
+            <h1>Grafico</h1>
+            <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+        </div>
 
     <div class="card-container" id="card-container">
 
-        {% for chamado in chamados %}
-        <form action=" {{ url_for('atualizarChamado', pagina='todos') }}" method="POST">
+            {% for chamado in chamados %}
+    <form action="{{ url_for('atualizarChamado', pagina='todos') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}">
 
-            <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}" />
+        <div class="card">
+            <div class="card-content">
+                <h1 class="editable-text">
+                    {{ chamado.descricao }}
+                    <i class="fas fa-pencil-alt edit-title-icon"></i>
+                </h1>
 
-            <div class="card">
+                <!-- Seção de upload de imagem -->
+                <div class="image-upload-container">
+                    <input type="file"
+                           name="imagem"
+                           class="image-input"
+                           id="image-input-{{ loop.index }}"
+                           accept="image/*"
+                           style="display: none;">
 
-                <p>{{ chamado.descricao }}</p>
+                    <label for="image-input-{{ loop.index }}" class="upload-button">
+                        <i class="fas fa-camera"></i>
+                        Adicionar Imagem
+                    </label>
+                    <div class="image-preview-container">
+                        <!-- Exibe a imagem salva (se existir) -->
+                        {% if chamado.Photo_path %}
+                        <img src="{{ url_for('uploaded_file', filename=chamado.Photo_path) }}"
+                             class="image-preview"
+                             id="preview-{{ loop.index }}">
+                        {% else %}
+                        <img src="" class="image-preview" id="preview-{{ loop.index }}">
+                        {% endif %}
+
+                        <button type="button" class="delete-image-btn" onclick="removeImage(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
 
                 <div class="observacoes">
-                    <textarea style="margin-bottom: 50px;" id="observacao-{{ chamado.chamado_id }}" name="observacao"
-                        placeholder="Digite suas observações">{{ chamado.observacao}}</textarea>
+                    <textarea
+                        id="observacao-{{ loop.index }}"
+                        name="observacao"
+                        placeholder="Digite suas observações"
+                    >{{ chamado.observacao }}</textarea>
                 </div>
-                <br><br>
 
                 <div class="status-select">
-
-                    <select name="status" onchange="onSelectedCard('{{ chamado.chamado_id }}, {{ chamado.status }}')">
-                        <option id="{{chamado.chamado_id}}" value="ongoing" {% if chamado.status=='ongoing' %}selected{%
-                            endif %}>Em Andamento</option>
-                        <option id="{{chamado.chamado_id}}" value="finished" {% if chamado.status=='finished'
-                            %}selected{% endif %}>Finalizado</option>
-                        <option id="{{chamado.chamado_id}}" value="most-urgent" {% if chamado.status=='most-urgent'
-                            %}selected{% endif %}>Muito Urgente</option>
-                        <option id="{{chamado.chamado_id}}" value="urgent" {% if chamado.status=='urgent' %}selected{%
-                            endif %}>Urgente</option>
-                        <option id="{{chamado.chamado_id}}" value="common" {% if chamado.status=='common' %}selected{%
-                            endif %}>Comum</option>
-                        <option id="{{chamado.chamado_id}}" value="no-status" {% if chamado.status=='no-status'
-                            %}selected{% endif %}>Sem Status</option>
+                    <select name="status" class="status-selector" onchange="onSelectedCard('{{ loop.index }}, {{ chamado.status }}')">
+                        <option value="ongoing" {% if chamado.status=='ongoing' %}selected{% endif %}>Em Andamento</option>
+                        <option value="finished" {% if chamado.status=='finished' %}selected{% endif %}>Finalizado</option>
+                        <option value="most-urgent" {% if chamado.status=='most-urgent' %}selected{% endif %}>Muito Urgente</option>
+                        <option value="urgent" {% if chamado.status=='urgent' %}selected{% endif %}>Urgente</option>
+                        <option value="common" {% if chamado.status=='common' %}selected{% endif %}>Comum</option>
+                        <option value="no-status" {% if chamado.status=='no-status' %}selected{% endif %}>Sem Status</option>
                     </select>
-
-                    <button class="button-salvar" type="submit">Salvar</button>
                 </div>
-            </div>
 
-        </form>
-        {% endfor %}
-    
+                <button class="button-salvar" type="submit">Salvar Alterações</button>
+            </div>
+        </div>
+    </form>
+    {% endfor %}
 
     </div>
 
     <footer class="footer">
-            <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+        <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
     </footer>
-    
-    <script>
-        const statusColors = {
-            'ongoing': '#FFC222',
-            'finished': '#28a745',
-            'most-urgent': '#dc3545',
-            'urgent': '#ff7b07',
-            'common': '#007bff',
-            'no-status': '#6c757d'
-        };
 
-        const statusPriority = {
-            'ongoing': 1,
-            'most-urgent': 2,
-            'urgent': 3,
-            'common': 4,
-            'finished': 5,
-            'no-status': 6
-        };
-
-        function sortCards() {
-            const container = document.getElementById('card-container');
-            const forms = Array.from(container.querySelectorAll('form'));
-
-            const sortedForms = forms.sort((a, b) => {
-                const aStatus = a.querySelector('.status-select select').value;
-                const bStatus = b.querySelector('.status-select select').value;
-                return statusPriority[aStatus] - statusPriority[bStatus];
-            });
-
-            sortedForms.forEach(sortedForm => container.appendChild(sortedForm));
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('card-container');
-            const cards = container.querySelectorAll('.card');
-
-            cards.forEach(card => {
-                const select = card.querySelector('.status-select select');
-
-                select.style.backgroundColor = statusColors[select.value];
-
-                select.addEventListener('change', (event) => {
-                    const newStatus = event.target.value;
-                    select.style.backgroundColor = statusColors[newStatus];
-                });
-            });
-
-            sortCards();
-        });
-
-        function onSelectedCard(id, status) {
-            // setTimeout(() => {
-            //     console.log(id, status)
-            // }, 1000);
-        }
-
-    </script>
+    <script src="/static/js/pedidos.js"></script>
 </body>
-
 </html>

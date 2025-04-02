@@ -8,6 +8,7 @@
   <title>Tabela</title>
     <link rel="stylesheet" href="/static/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="/static/css/testes/top.css">
+    <link rel="stylesheet" href="/static/css/teste.css">
     <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
     <link rel="stylesheet" href="/static/css/header-footer.css">
 </head>
@@ -21,72 +22,66 @@
   </div>
 
 <body>
-    <div class="container">
-    <table id="example" class="display" style="width:100%">
-      <thead>
-        <tr>
-          <th>descrição</th>
-          <th>status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for chamado in chamados %}
-        <tr>
-          <td>{{ chamado.descricao }}</td>
-          <td>
-            {% if chamado.status == 'ongoing' %}
-              Em Andamento
-            {% elif chamado.status == 'finished' %}
-              Finalizado
-            {% elif chamado.status == 'most-urgent' %}
-              Muito Urgente
-            {% elif chamado.status == 'urgent' %}
-              Urgente
-            {% elif chamado.status == 'common' %}
-              Comum
-            {% elif chamado.status == 'no-status' %}
-              Sem Status
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Digite um chamado">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <!-- Table -->
+   <div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Descrição</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chamado in chamados %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ chamado.descricao }}</td>
+                <td>
+                    {% if chamado.status == 'ongoing' %}
+                        Em Andamento
+                    {% elif chamado.status == 'finished' %}
+                        Finalizado
+                    {% elif chamado.status == 'most-urgent' %}
+                        Muito Urgente
+                    {% elif chamado.status == 'urgent' %}
+                        Urgente
+                    {% elif chamado.status == 'common' %}
+                        Comum
+                    {% elif chamado.status == 'no-status' %}
+                        Sem Status
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    <!-- Table Footer -->
+    <div class="table-footer">
+        <div id="results-count">Exibindo 6 de 6</div>
+        <div class="pagination">
+            <button id="prev-page" disabled>Anterior</button>
+            <span id="current-page">Página 1</span>
+            <button id="next-page" disabled>Próxima</button>
+        </div>
+    </div>
+   </div>
+
   </div>
 
-<footer class="footer">
-            <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
-</footer>
 
+    <!-- Footer -->
+    <footer class="footer">
+        Copyright 2025 © Todos os direitos reservados.
+    </footer>
+<script src="/static/js/teste.js"></script>
 </body>
-    <script src="/static/js/jquery-3.7.1.js"></script>
-    <script src="/static/js/dataTables.js"></script>
-    <script>
-        $('#example').DataTable({
-            "language": {
-                "search": "Pesquisa:",
-                "entries": "Chamados",
-            }, paging: false
-        });
-
-        function filterGlobal(table) {
-            table
-                .search(
-                    $('#global_filter').val(),
-                    $('#global_regex').prop('checked'),
-                    $('#global_smart').prop('checked')
-                )
-                .draw();
-        }
-
-        var table = $('#example').DataTable();
-
-        $('input.global_filter').on('keyup click', function () {
-            filterGlobal(table);
-        });
-
-
-
-    </script>
 
 </html>
