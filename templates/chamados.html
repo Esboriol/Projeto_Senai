@@ -1,67 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Chamados</title>
-    <link rel="stylesheet" href="/static/css/testes/top.css">
-    <link rel="stylesheet" href="/static/css/testes/cmds.css">
-    <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
-    <link rel="stylesheet" href="/static/css/header-footer.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status dos Chamados</title>
+  <link rel="stylesheet" href="/static/css/testes/top.css">
+  <link rel="stylesheet" href="/static/css/selecionador.css">
+  <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
-<div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Chamados</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
-</div>
-
-
 <body>
-    <div class="container">
-        <a href="{{ url_for('pedidosF') }}" style="margin-bottom: 1vw;">
-            <div class="box red">
+  <!-- Cabeçalho -->
+  <div class="comeco">
+            <a href="{{ url_for('home') }}">
+              <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+            </a>
+            <h1>Status dos Chamados</h1>
+            <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+        </div>
 
-                <img src="icon-finalizados.png" alt="Finalizados">
-                <p>Finalizados</p>
-            </div>
-        </a>
-        <a href="{{ url_for('pedidosO') }}" style="margin-bottom: 1vw;">
-            <div class="box">
-                <img src="icon-andamento.png" alt="Em andamento">
-                <p>Em andamento</p>
-            </div>
-        </a>
-        <a href="{{ url_for('pedidosNS') }}" style="margin-bottom: 1vw;">
-            <div class="box">
-                <img src="icon-semstatus.png" alt="Sem status">
-                <p>Sem status</p>
-            </div>
-        </a>
-        <a href="{{ url_for('pedidosC') }}" style="margin-bottom: 1vw;">
-            <div class="box">
-                <img src="icon-baixaurgencia.png" alt="Baixa urgência">
-                <p>Baixa urgência</p>
-            </div>
-        </a>
-        <a href="{{ url_for('pedidosU') }}" style="margin-bottom: 1vw;">
-            <div class="box">
-                <img src="icon-urgente.png" alt="Urgente">
-                <p>Urgente</p>
-            </div>
-        </a>
-        <a href="{{ url_for('pedidosMU') }}" style="margin-bottom: 1vw;">
-            <div class="box">
-                <img src="icon-altaurgencia.png" alt="Alta urgência">
-                <p>Alta urgência</p>
-            </div>
-        </a>
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <div class="status-grid">
+      <!-- Sem Status -->
+      <a href="{{ url_for('pedidosNS') }}" class="status-card no-status">
+        <img src="https://storage.googleapis.com/a1aa/image/dqkKtJPS6j_0F4Xdcv54R54mU3fjVKXYotNMHy_T3j0.jpg"
+             alt="Sem Status" class="status-icon">
+        <span class="status-label">Sem Status</span>
+      </a>
+
+      <!-- Em Andamento -->
+      <a href="{{ url_for('pedidosO') }}" class="status-card in-progress">
+        <img src="https://storage.googleapis.com/a1aa/image/J-Bf_IlwqwiHRAPjp1FY8qjrKHEXnokOmW2SZ8XGpUg.jpg"
+             alt="Em Andamento" class="status-icon">
+        <span class="status-label">Em Andamento</span>
+      </a>
+
+      <!-- Finalizados -->
+      <a href="{{ url_for('pedidosF') }}" class="status-card completed">
+        <img src="https://storage.googleapis.com/a1aa/image/J-Bf_IlwqwiHRAPjp1FY8qjrKHEXnokOmW2SZ8XGpUg.jpg"
+             alt="Finalizados" class="status-icon">
+        <span class="status-label">Finalizados</span>
+      </a>
+
+      <!-- Alta Urgência -->
+      <a href="{{ url_for('pedidosMU') }}" class="status-card very-urgent">
+        <img src="https://storage.googleapis.com/a1aa/image/wuknmth8yoQPWt5JYZdta6AYPV4ilF7LSHqqCnTb3mk.jpg"
+             alt="Alta Urgência" class="status-icon">
+        <span class="status-label">Alta Urgência</span>
+      </a>
+
+      <!-- Urgente -->
+      <a href="{{ url_for('pedidosU') }}" class="status-card urgent">
+        <img src="https://storage.googleapis.com/a1aa/image/MGz7QtC-KPjO5cIy_PpIV7GIdm8Lo1aKy0FwyxBE0uU.jpg"
+             alt="Urgente" class="status-icon">
+        <span class="status-label">Urgente</span>
+      </a>
+
+      <!-- Baixa Urgência -->
+      <a href="{{ url_for('pedidosC') }}" class="status-card common">
+        <img src="https://storage.googleapis.com/a1aa/image/TD8p_Gvi9ISIeXNRR3Ll5wdpzOD3quw3TmxaT51NHjk.jpg"
+             alt="Baixa Urgência" class="status-icon">
+        <span class="status-label">Baixa Urgência</span>
+      </a>
     </div>
+  </main>
 
-    <footer class="footer">
-            <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
-    </footer>
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p class="footer-text">&copy; 2025 SENAI. Todos os direitos reservados.</p>
+  </footer>
 
+  <script src="/static/js/pedidos.js"></script>
 </body>
 </html>

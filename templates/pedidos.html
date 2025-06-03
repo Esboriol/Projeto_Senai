@@ -23,7 +23,8 @@
     <div class="card-container" id="card-container">
 
             {% for chamado in chamados %}
-    <form action="{{ url_for('atualizarChamado', pagina='todos') }}" method="POST" enctype="multipart/form-data">
+
+                    <form action="{{ url_for('atualizarChamado', pagina='todos') }}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}">
 
         <div class="card">
@@ -35,28 +36,31 @@
 
                 <!-- Seção de upload de imagem -->
                 <div class="image-upload-container">
-                    <input type="file"
-                           name="imagem"
-                           class="image-input"
-                           id="image-input-{{ loop.index }}"
-                           accept="image/*"
-                           style="display: none;">
 
-                    <label for="image-input-{{ loop.index }}" class="upload-button">
-                        <i class="fas fa-camera"></i>
-                        Adicionar Imagem
-                    </label>
-                    <div class="image-preview-container">
+                    <div class=""> <!---->
+
                         <!-- Exibe a imagem salva (se existir) -->
-                        {% if chamado.Photo_path %}
-                        <img src="{{ url_for('uploaded_file', filename=chamado.Photo_path) }}"
-                             class="image-preview"
-                             id="preview-{{ loop.index }}">
+                        {% if not chamado.Photo_path %}
+                            <input type="file"
+                                name="imagem"
+                                class="image-input"
+                                id="image-input-{{ loop.index }}"
+                                accept="image/*"
+                                style="display: none;">
+
+                            <label for="image-input-{{ loop.index }}" class="upload-button" id="upload-label-{{ loop.index }}">
+                                <i class="fas fa-camera"></i>
+                                Adicionar Imagem
+                            </label>
+
+                            <img src="#" alt="Preview da imagem" class="image-preview" id="preview-{{ loop.index }}" style="display: none;" />
                         {% else %}
-                        <img src="" class="image-preview" id="preview-{{ loop.index }}">
+                            <img src="{{ url_for('get_photo', filename=chamado.Photo_path) }}"
+                                 class="image-preview"
+                                 id="preview-{{ loop.index }}">
                         {% endif %}
 
-                        <button type="button" class="delete-image-btn" onclick="removeImage(this)">
+                        <button class="delete-image-btn">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -85,7 +89,8 @@
             </div>
         </div>
     </form>
-    {% endfor %}
+
+            {% endfor %}
 
     </div>
 
