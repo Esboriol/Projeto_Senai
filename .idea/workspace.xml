@@ -8,12 +8,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/chamado.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/chamado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/pedidos.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/pedidos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/pedidos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/pedidos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/EmAndamento.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/EmAndamento.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/finalizado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/finalizado.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/semstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/semstatus.html" afterDir="false" />
     </list>
     <list id="54d8f6a7-3f5c-496a-9688-a502f1119938" name="Changes by Aluno" comment="">
-      <change beforePath="$PROJECT_DIR$/static/css/pedidos.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/pedidos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tabela.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tabela.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/testes/top.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/testes/top.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/muitoUrgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/muitoUrgente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/urgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/urgente.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +54,35 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Projeto_Senai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -64,5 +100,16 @@
       <updated>1741788582435</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
