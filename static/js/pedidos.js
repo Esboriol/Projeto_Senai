@@ -17,6 +17,33 @@ const statusConfig = {
     }
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll('.image-input');
+
+  inputs.forEach(input => {
+    input.addEventListener('change', function () {
+      const index = this.id.split('-')[2]; // pega o número do ID
+      const preview = document.getElementById(`preview-${index}`);
+      const label = document.getElementById(`upload-label-${index}`);
+      const file = this.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          if (label) {
+            label.style.display = 'none';
+          }
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+});
+
 // Função para ordenar os cards com base no status
 function sortCards() {
     const container = document.getElementById('card-container');
@@ -130,16 +157,54 @@ function handleImageUpload(input) {
     }
 }
 
-// Função para remover imagem
 function removeImage(btn) {
     const container = btn.closest('.image-upload-container');
     const input = container.querySelector('.image-input');
     const preview = container.querySelector('.image-preview');
+    const previewContainer = container.querySelector('.image-preview-container');
 
-    container.classList.remove('has-image');
-    input.value = '';
-    preview.src = '';
+    const chamadoId = container.closest('form').querySelector('input[name="chamado_id"]').value;  // Pega o ID do chamado
+
+    // Envia uma requisição para o servidor para remover a imagem no banco de dados
+    fetch('/removerImagem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ chamado_id: chamadoId })  // Envia o ID do chamado
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Se a remoção for bem-sucedida, remove a imagem da interface
+            container.classList.remove('has-image');
+            input.value = '';  // Limpa o campo de input
+            preview.src = '';  // Limpa a imagem
+            previewContainer.style.display = 'none';  // Esconde o container da imagem
+        } else {
+            console.error('Erro ao remover a imagem do banco de dados:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erro na requisição:', error);
+    });
 }
+
+// Adiciona o evento para o botão "X"
+document.querySelectorAll('.delete-image-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        removeImage(btn);
+    });
+});
+
+
+// Adiciona o evento para o botão "X"
+document.querySelectorAll('.delete-image-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        removeImage(btn);
+    });
+});
+
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
