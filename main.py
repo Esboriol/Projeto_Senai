@@ -1,6 +1,5 @@
 from flask import Flask, render_template, redirect, request
 from models.chamado import *
-from database import get_db_connection
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import os
@@ -29,9 +28,56 @@ def chamados():
 def tabelas():
     return render_template("/testes/tabela.html")
 
+@app.route('/photo/<filename>')
+def get_photo(filename):
+    filename = filename.replace('photos\\', '')
+    return send_from_directory('photos', filename)
+
+
+@app.route("/removerImagem", methods=["POST"])
+def remover_imagem():
+    chamado_id = request.json.get('chamado_id')
+
+    if chamado_id is None:
+        return {"success": False, "message": "Chamado ID é obrigatório"}, 400
+
+    # Conecta ao banco de dados e remove a referência da imagem
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Primeiro, pega o caminho da imagem atual para deletá-la do sistema de arquivos
+    cursor.execute("SELECT photo_path FROM chamados WHERE id = %s", (chamado_id,))
+    photo_path = cursor.fetchone()
+
+    if photo_path is None:
+        return {"success": False, "message": "Imagem não encontrada"}, 404
+
+    photo_path = photo_path[0]  # Caminho da imagem no banco de dados
+
+    # Remover a imagem do banco de dados
+    cursor.execute("UPDATE chamados SET photo_path = NULL WHERE id = %s", (chamado_id,))
+    conn.commit()
+
+    # Deletar a imagem do sistema de arquivos (caso necessário)
+    try:
+        if os.path.exists(photo_path):
+            os.remove(photo_path)
+        else:
+            print(f"Arquivo {photo_path} não encontrado no sistema.")
+    except Exception as e:
+        print(f"Erro ao deletar a imagem: {e}")
+
+    cursor.close()
+    conn.close()
+
+    return {"success": True}, 200
+
 @app.route("/pedidos")
 def pedidos():
-    return render_template("pedidos.html", chamados=get_chamados_by_status(None))
+    chamados = get_chamados_by_status(None)
+    for c in chamados:
+        print(type(c.Photo_path))
+    return render_template("pedidos.html", chamados=chamados)
 
 @app.route("/chamados")
 def chamado():
@@ -120,7 +166,13 @@ def atualizarChamado(pagina):
     chamadoId = request.form['chamado_id']
     observacao = request.form['observacao']
     status = request.form['status']
-    POSTChamado(chamadoId, observacao, status)
+    imagem = request.files.get('imagem')
+    image_path = None
+    if imagem and imagem.filename != '':
+        filename = secure_filename(imagem.filename)
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        imagem.save(image_path)
+    POSTChamado(chamadoId, observacao, status, image_path)
     if pagina == 'todos':
         return redirect("/pedidos")
     elif pagina == 'andamento':

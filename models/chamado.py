@@ -62,17 +62,27 @@ def get_chamados_by_status(status) -> List[Chamado]:
         chamados.append(chamado)
     return chamados
 
-def POSTChamado(chamado_id, observacao, status):
+def POSTChamado(chamado_id, observacao, status, photo_path=None):
     conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute(
+    cur = conn.cursor()
+
+    if photo_path:
+        sql = """
+            UPDATE chamados
+            SET observacao = %s, status = %s, photo_path = %s
+            WHERE id = %s
         """
-        UPDATE chamados
-        SET observacao = %s, status = %s
-        WHERE id = %s
-        """, (observacao, status, chamado_id)
-    )
+        cur.execute(sql, (observacao, status, photo_path, chamado_id))
+    else:
+        sql = """
+            UPDATE chamados
+            SET observacao = %s, status = %s
+            WHERE id = %s
+        """
+        cur.execute(sql, (observacao, status, chamado_id))
+
     conn.commit()
+    cur.close()
     conn.close()
 
 def salvar(nome, email, ambiente, descricao, photo_path):
