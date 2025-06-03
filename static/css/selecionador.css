@@ -1,0 +1,203 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Corpo ocupa a tela inteira */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+/* ============ HEADER ============ */
+.header {
+  background-color: #E60000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header a:hover {
+  color: #ffcccc;
+}
+
+.btn-voltar {
+  background-color: #E60000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-right: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #cc0000;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  margin-right: 50px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+  opacity: 0.8;
+}
+
+/* ============ CONTEÚDO PRINCIPAL ============ */
+.main-content {
+  /* Faz o main crescer para ocupar o espaço entre header e footer */
+  flex: 1;
+  /* Centraliza verticalmente e horizontalmente o grid */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem; /* se quiser mais ou menos espaço nas bordas, ajuste aqui */
+}
+
+/* Grid 3 colunas x 2 linhas */
+.status-grid {
+  width: 90%;
+  /* height: 80vh; <-- REMOVA esta linha */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 2rem;
+}
+
+
+
+/* Cartões */
+.status-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 250px;
+  min-width: 300px;
+}
+
+
+.status-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.no-status {
+  background-color: #E60000;
+  color: white;
+}
+
+/* Ícone do status */
+.status-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  object-fit: cover; /* ou contain, conforme a imagem */
+}
+/* Cores para cada status */
+.status-card.no-status { background-color: #A0A0A0; color: white; }  /* Cinza */
+.status-card.in-progress { background-color: #FFD700; color: white; } /* Amarelo */
+.status-card.completed { background-color: #28A745; color: white; }   /* Verde */
+.status-card.very-urgent { background-color: #E60000; color: white; } /* Vermelho */
+.status-card.urgent { background-color: #FFA500; color: white; }      /* Laranja */
+.status-card.common { background-color: #007BFF; color: white; }      /* Azul */
+
+/* Ajustes para garantir boa leitura */
+.status-card span {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Efeito hover */
+.status-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Título/label do cartão */
+.status-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ============ RODAPÉ ============ */
+.footer {
+  background-color: #E60000;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  width: 100%;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ============ RESPONSIVIDADE ============ */
+@media (max-width: 768px) {
+  .status-grid {
+    width: 100%;
+    height: auto; /* ou mantenha se quiser rolagem */
+    grid-template-columns: repeat(2, 1fr); /* cai pra 2 colunas */
+    grid-template-rows: repeat(3, 1fr);    /* 3 linhas */
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-grid {
+    grid-template-columns: 1fr;  /* 1 coluna */
+    grid-template-rows: auto;    /* quantas linhas precisar */
+  }
+
+  .status-card {
+    padding: 2rem 1rem;
+  }
+
+  .status-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .status-label {
+    font-size: 1rem;
+  }
+}

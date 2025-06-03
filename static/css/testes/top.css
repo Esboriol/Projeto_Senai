@@ -15,7 +15,6 @@ body {
   background-color: white;
   padding: 10px 20px;
   border-bottom: 3px solid red;
-  /* Removido position: fixed */
   width: 100%;
   z-index: 1000;
 }
