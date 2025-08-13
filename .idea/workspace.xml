@@ -5,33 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b68915dc-0077-47d1-9a87-f23b214b0542" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/req.txt" beforeDir="false" afterPath="$PROJECT_DIR$/req.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/header-footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/selecionador.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/selecionador.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
-    <list id="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" name="Changes by DEV_4" comment="">
-      <change beforePath="$PROJECT_DIR$/static/css/testes/top.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/testes/top.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/EmAndamento.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/EmAndamento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comum.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/finalizado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/finalizado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/grafico.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/grafico.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/muitoUrgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/muitoUrgente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/semstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/semstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tabela.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tabela.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test/todos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test/todos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/urgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/urgente.html" afterDir="false" />
-    </list>
+    <list id="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" name="Changes by DEV_4" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,21 +24,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/templates/chamados.html">
-      <ranges>
-        <range start1="7" end1="7" start2="7" end2="8" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
-        <range start1="20" end1="20" start2="21" end2="26" changelist="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/templates/home.html">
-      <ranges>
-        <range start1="6" end1="7" start2="6" end2="7" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
-        <range start1="44" end1="45" start2="44" end2="45" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
-        <range start1="60" end1="61" start2="60" end2="61" changelist="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 2
