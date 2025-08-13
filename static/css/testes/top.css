@@ -41,3 +41,10 @@ body {
   width: 100%; /* Certifique-se de que a largura da tabela seja 100% */
   padding: 0 20px; /* Adicionei um pouco de padding para o conteúdo */
 }
+.back-arrow {
+  position: absolute; /* ou fixed, se quiser que fique visível mesmo rolando a página */
+  top: 17%;           /* centraliza verticalmente */
+  left: 10px;         /* quase grudada na borda esquerda */
+  height: 35px;
+  cursor: pointer;
+}
