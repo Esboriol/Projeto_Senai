@@ -18,15 +18,19 @@
 </div>
 
 <body>
-
+<svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
+         class="back-arrow" viewBox="0 0 24 24" fill="none"
+         stroke="red" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+    </svg>
     <div class="container">
         <a href="{{ url_for ('pedidos') }}">
             <div class="box">
                 <h1 style="top: 20%; left: 45%;" class="title">Cartão</h1>
                 <img style="transform: rotate(-45deg); position: absolute; top: 40%; left: 11.8%;" src="static/img/cartao.png" alt="Ícone 1" class="image">
             </div>
-
         </a>
+
 
         <a href="{{ url_for ('tabela') }}">
             <div class="box">
@@ -38,7 +42,7 @@
     </div>
 
     <footer class="footer">
-            <p>&copy; 2024 SENAI. Todos os direitos reservados.</p>
+            <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
     </footer>
 
 </body>
