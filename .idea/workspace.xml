@@ -4,22 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eda4938e-d59b-4163-81b4-8e43c73bc83f" name="Changes" comment="">
+    <list default="true" id="b68915dc-0077-47d1-9a87-f23b214b0542" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/chamado.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/chamado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/pedidos.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/pedidos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/pedidos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/pedidos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/EmAndamento.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/EmAndamento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/finalizado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/finalizado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/semstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/semstatus.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/req.txt" beforeDir="false" afterPath="$PROJECT_DIR$/req.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/header-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/header-footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/selecionador.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/selecionador.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
-    <list id="54d8f6a7-3f5c-496a-9688-a502f1119938" name="Changes by Aluno" comment="">
+    <list id="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" name="Changes by DEV_4" comment="">
       <change beforePath="$PROJECT_DIR$/static/css/testes/top.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/testes/top.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/EmAndamento.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/EmAndamento.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/finalizado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/finalizado.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/grafico.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/grafico.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/muitoUrgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/muitoUrgente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/semstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/semstatus.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tabela.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tabela.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test/todos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test/todos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/urgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/urgente.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +40,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -37,52 +48,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2uDgVVjDqIP88GxNct4GvnN3yZz" />
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/templates/chamados.html">
+      <ranges>
+        <range start1="7" end1="7" start2="7" end2="8" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
+        <range start1="20" end1="20" start2="21" end2="26" changelist="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/templates/home.html">
+      <ranges>
+        <range start1="6" end1="7" start2="6" end2="7" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
+        <range start1="44" end1="45" start2="44" end2="45" changelist="b68915dc-0077-47d1-9a87-f23b214b0542" />
+        <range start1="60" end1="61" start2="60" end2="61" changelist="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" />
+      </ranges>
+    </file>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="31Ee0uJvW08pJQKKLfTF75QtShE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Projeto_Senai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.main" />
-      </list>
-    </recent_temporary>
-  </component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -93,23 +89,15 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eda4938e-d59b-4163-81b4-8e43c73bc83f" name="Changes" comment="" />
-      <created>1741788582435</created>
+      <changelist id="b68915dc-0077-47d1-9a87-f23b214b0542" name="Changes" comment="" />
+      <created>1755093439805</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1741788582435</updated>
+      <updated>1755093439805</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
 </project>
