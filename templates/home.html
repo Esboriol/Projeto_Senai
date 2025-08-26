@@ -10,13 +10,34 @@
   <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
   <link rel="stylesheet" href="/static/css/header-footer.css">
 </head>
-
   <div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Home</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  <a href="{{ url_for('home') }}">
+    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+  </a>
+
+  <h1>{{ title if title is defined else "Home" }}</h1>
+
+  <div class="user-wrapper">
+      {% if session.get('username') %}
+        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
+          <img src="{{ url_for('get_photo', filename=foto.replace('photos/', '')) if foto else '/static/img/ps.png' }}" alt="Foto do usuário" class="user-icon">
+        </button>
+        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
+          <div class="user-info">
+            <strong>{{ session.get('username') }}</strong>
+          </div>
+          <div class="user-actions">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+          </div>
+        </div>
+
+      {% else %}
+        <div class="auth-links">
+          <a href="{{ url_for('register') }}">Registrar</a> |
+          <a href="{{ url_for('inicial') }}">Entrar</a>
+        </div>
+      {% endif %}
+    </div>
   </div>
 
 <body>
@@ -34,7 +55,7 @@
     <a href=" {{ url_for('todes') }}">
       <div class="slide-content">
         <img src="/static/img/sl2.png" alt="Imagem 2">
-        <p>Todas as Chamadas</p>
+        <p>Todas os Chamados</p>
       </div>
     </a>
   </div>
@@ -42,7 +63,7 @@
     <a href=" {{ url_for('grafico') }}">
       <div class="slide-content">
         <img src="/static/img/sl3.png" alt="Imagem 3">
-        <p>Gráficos</p>
+        <p>Gráfico</p>
       </div>
     </a>
   </div>
@@ -62,5 +83,6 @@
   </footer>
 
   <script src="/static/js/testes/teste.js"></script>
+  <script src="/static/js/usu.js"></script>
 </body>
 </html>

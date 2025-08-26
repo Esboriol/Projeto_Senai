@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Status dos Chamados</title>
-  <link rel="stylesheet" href="/static/css/testes/top.css">
   <link rel="stylesheet" href="/static/css/header-footer.css">
+  <link rel="stylesheet" href="/static/css/testes/top.css">
   <link rel="stylesheet" href="/static/css/selecionador.css">
   <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -13,12 +13,36 @@
 <body>
   <!-- Cabeçalho -->
   <div class="comeco">
-            <a href="{{ url_for('home') }}">
-              <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-            </a>
-            <h1>Status dos Chamados</h1>
-            <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  <a href="{{ url_for('home') }}">
+    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+  </a>
+
+  <h1>{{ title if title is defined else "Chamados" }}</h1>
+
+  <div class="user-wrapper">
+      {% if session.get('username') %}
+        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
+          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
+        </button>
+
+        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
+          <div class="user-info">
+            <strong>{{ session.get('username') }}</strong>
+          </div>
+          <div class="user-actions">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+          </div>
         </div>
+
+      {% else %}
+        <div class="auth-links">
+          <a href="{{ url_for('register') }}">Registrar</a> |
+          <a href="{{ url_for('inicial') }}">Entrar</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
   <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
          class="back-arrow" viewBox="0 0 24 24" fill="none"
          stroke="red" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -62,9 +86,10 @@
 
   <!-- Rodapé -->
   <footer class="footer">
-    <p class="footer-text">&copy; 2025 SENAI. Todos os direitos reservados.</p>
+    <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
   </footer>
 
   <script src="/static/js/pedidos.js"></script>
+  <script src="/static/js/usu.js"></script>
 </body>
 </html>

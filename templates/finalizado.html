@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +12,36 @@
 </head>
 
 <body>
-    <div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Finalizados</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
+  <div class="comeco">
+  <a href="{{ url_for('home') }}">
+    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+  </a>
+
+  <h1>{{ title if title is defined else "Finalizados" }}</h1>
+
+  <div class="user-wrapper">
+      {% if session.get('username') %}
+        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
+          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
+        </button>
+
+        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
+          <div class="user-info">
+            <strong>{{ session.get('username') }}</strong>
+          </div>
+          <div class="user-actions">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+          </div>
+        </div>
+
+      {% else %}
+        <div class="auth-links">
+          <a href="{{ url_for('register') }}">Registrar</a> |
+          <a href="{{ url_for('inicial') }}">Entrar</a>
+        </div>
+      {% endif %}
     </div>
+  </div>
     <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
          class="back-arrow" viewBox="0 0 24 24" fill="none"
          stroke="red" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -66,11 +88,11 @@
         </form>
         {% endfor %}
     </div>
-    <footer class="footer">
-        <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
-    </footer>
-    <!--        <script src="/static/js/ns.js"></script>-->
-
+  <footer class="footer">
+            <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
+  </footer>
+        <script src="/static/js/ns.js"></script>
+        <script src="/static/js/usu.js"></script>
         <script>
             const statusColors = {
                 'ongoing': '#FFC222',
@@ -91,11 +113,42 @@
             };
 
             // Função para ordenar os cards com base no status
-            function sortCards() {
-                const container = document.getElementById('card-container');
-                const forms = Array.from(container.querySelectorAll('form'));
+        function sortCards() {
+            const container = document.getElementById('card-container');
+            const forms = Array.from(container.querySelectorAll('form'));
 
-                // Ordena os forms com base na prioridade do status
+            const sortedForms = forms.sort((a, b) => {
+                const aStatus = a.querySelector('.status-select select').value;
+                const bStatus = b.querySelector('.status-select select').value;
+                return statusPriority[aStatus] - statusPriority[bStatus];
+            });
+
+            sortedForms.forEach(sortedForm => container.appendChild(sortedForm));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('card-container');
+            const cards = container.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const select = card.querySelector('.status-select select');
+
+                select.style.backgroundColor = statusColors[select.value];
+
+                select.addEventListener('change', (event) => {
+                    const newStatus = event.target.value;
+                    select.style.backgroundColor = statusColors[newStatus];
+                });
+            });
+
+            sortCards();
+        });
+
+        function onSelectedCard(id, status) {
+            // setTimeout(() => {
+            //     console.log(id, status)
+            // }, 1000);
+        }                // Ordena os forms com base na prioridade do status
                 const sortedForms = forms.sort((a, b) => {
                     const aStatus = a.querySelector('.status-select select').value;
                     const bStatus = b.querySelector('.status-select select').value;
@@ -127,11 +180,6 @@
                 // Ordena os cards ao carregar a página
                 sortCards();
             });
-
-
-
-
         </script>
 </body>
-
 </html>

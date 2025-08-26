@@ -10,12 +10,35 @@
 </head>
 
 <div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Todos Chamados</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
-</div>
+  <a href="{{ url_for('home') }}">
+    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+  </a>
+
+  <h1>{{ title if title is defined else "Todos os Chamados" }}</h1>
+
+  <div class="user-wrapper">
+      {% if session.get('username') %}
+        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
+          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
+        </button>
+
+        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
+          <div class="user-info">
+            <strong>{{ session.get('username') }}</strong>
+          </div>
+          <div class="user-actions">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+          </div>
+        </div>
+
+      {% else %}
+        <div class="auth-links">
+          <a href="{{ url_for('register') }}">Registrar</a> |
+          <a href="{{ url_for('inicial') }}">Entrar</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 
 <body>
 <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
@@ -41,9 +64,12 @@
 
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="margin-top: 109px">
             <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
     </footer>
 
 </body>
+
+<script src="static/js/usu.js"></script>
+
 </html>

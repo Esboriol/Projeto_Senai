@@ -12,14 +12,36 @@
   <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
   <title>Gráfico</title>
 </head>
+  <div class="comeco">
+  <a href="{{ url_for('home') }}">
+    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
+  </a>
 
-<div class="comeco">
-        <a href="{{ url_for('home') }}">
-          <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-        </a>
-        <h1>Gráfico</h1>
-        <img src="/static/img/ps.png" alt="Ícone de Usuário" class="user-icon">
-</div>
+  <h1>{{ title if title is defined else "Gráfico" }}</h1>
+
+  <div class="user-wrapper">
+      {% if session.get('username') %}
+        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
+          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
+        </button>
+
+        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
+          <div class="user-info">
+            <strong>{{ session.get('username') }}</strong>
+          </div>
+          <div class="user-actions">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+          </div>
+        </div>
+
+      {% else %}
+        <div class="auth-links">
+          <a href="{{ url_for('register') }}">Registrar</a> |
+          <a href="{{ url_for('inicial') }}">Entrar</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
         <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
          class="back-arrow" viewBox="0 0 24 24" fill="none"
          stroke="red" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -35,9 +57,8 @@
   <footer class="footer">
             <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
   </footer>
-
-
   <script src="/static/js/jquery-3.7.1.js"></script>
+  <script src="/static/js/usu.js"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
