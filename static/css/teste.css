@@ -1,6 +1,5 @@
 /* Reset básico */
 * {
-    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -204,16 +203,6 @@ tr:hover {
 
 #results-count {
     font-weight: 500;
-}
-
-/* Footer */
-.footer {
-    background-color: #E60000;
-    color: white;
-    text-align: center;
-    padding: 8px;
-    width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsividade */

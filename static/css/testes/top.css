@@ -8,12 +8,72 @@ body {
   background-color: #f4f4f4;
 }
 
+.user-wrapper {
+  position: relative;
+  margin-right: 6%;
+  display: flex;
+  align-items: center;
+}
+
+.user-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.user-icon {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+}
+
+.user-menu {
+  display: none;
+  position: absolute;
+  right: -100%;
+  top: calc(100% + 8px);
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  min-width: 160px;
+  z-index: 2000;
+}
+
+.user-menu.show {
+  display: block;
+}
+
+.user-menu .user-info {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.user-menu .logout-btn {
+  display: inline-block;
+  padding: 6px 10px;
+  text-decoration: none;
+  color: #c00;
+  font-weight: 600;
+}
+.auth-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  margin: 0 6px;
+}
+
 .comeco {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  padding: 10px 20px;
+  padding: 10px 0px;
   border-bottom: 3px solid red;
   width: 100%;
   z-index: 1000;
