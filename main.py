@@ -1,7 +1,7 @@
-from flask import Flask, render_template, redirect, request, session, flash, send_from_directory
+from flask import Flask, render_template, request, flash, send_from_directory
 from models.chamado import *   # assume get_db_connection(), get_chamados_by_status(), salvar(), POSTChamado(), ...
 from werkzeug.utils import secure_filename
-from werkzeug.security import generate_password_hash, check_password_hash
+from models.usuario import *
 import os
 
 UPLOADS_PHOTO = 'photos'
@@ -20,54 +20,6 @@ def uploaded_file(filename):
 def get_photo(filename):
     filename = filename.replace('photos\\', '')
     return send_from_directory('photos', filename)
-
-# ---- criação da tabela de usuários (tenta compatibilizar com PostgreSQL/MySQL/SQLite) ----
-def create_users_table():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    created = False
-    # Tenta SQL estilo PostgreSQL / MySQL
-    try:
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(150) UNIQUE NOT NULL,
-                email VARCHAR(200) UNIQUE,
-                password_hash VARCHAR(256) NOT NULL
-            )
-        """)
-        created = True
-    except Exception:
-        # tenta MySQL style
-        try:
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS users (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(150) UNIQUE NOT NULL,
-                    email VARCHAR(200) UNIQUE,
-                    password_hash VARCHAR(256) NOT NULL
-                )
-            """)
-            created = True
-        except Exception:
-            # fallback para SQLite
-            try:
-                cursor.execute("""
-                    CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT UNIQUE NOT NULL,
-                        email TEXT UNIQUE,
-                        password_hash TEXT NOT NULL
-                    )
-                """)
-                created = True
-            except Exception as e:
-                print("Erro ao tentar criar tabela users:", e)
-
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return created
 
 # ---- rotas de páginas existentes ----
 @app.route("/")
@@ -97,12 +49,26 @@ def pedidos():
 def chamado():
     return render_template("chamados.html")
 
+
 @app.route("/home")
 def home():
-    # Se quiser restringir: redirecionar ao login se não tiver session
     if 'username' not in session:
         return redirect('/')
-    return render_template("home.html", username=session.get('username'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Pega a foto do usuário logado
+    cursor.execute("SELECT foto FROM usuarios WHERE nome = %s", (session['username'],))
+    row = cursor.fetchone()
+
+    foto = row[0] if row and row[0] else None
+
+    cursor.close()
+    conn.close()
+
+    return render_template("home.html", username=session.get('username'), foto=foto)
+
 
 @app.route("/todos")
 def todes():
@@ -165,7 +131,7 @@ def salvarChamado():
         ambiente = request.form.get("ambiente", "")
         descricao_chamado = request.form.get("descricao_chamado", "")
         # A função salvar(nome, email, ambiente, descricao, photo_path) deve existir em models.chamado
-        salvar(nome_solicitante, email_solicitante, ambiente, descricao_chamado, photo_path)
+        salvar_chamado(nome_solicitante, email_solicitante, ambiente, descricao_chamado, photo_path)
         return render_template("obrigado.html")
     # se não houver arquivo (opcional)
     flash("Nenhuma foto enviada.", "warning")
@@ -179,9 +145,8 @@ def register():
 
     nome = request.form.get('username', '').strip()
     email = request.form.get('email', '').strip() or None
-    telefone = request.form.get('telefone', '').strip() or ''   # se não enviar, salva string vazia
-    cargo = request.form.get('cargo', '').strip() or ''         # se não enviar, salva string vazia
-    foto = request.form.get('foto', '').strip() or ''           # campo opcional (path ou url)
+    telefone = request.form.get('telefone', '').strip() or ''
+    cargo = request.form.get('cargo', '').strip() or ''
     password = request.form.get('password', '')
     password2 = request.form.get('password2', '')
 
@@ -192,43 +157,17 @@ def register():
         flash('As senhas não coincidem.', 'danger')
         return redirect('/register')
 
-    pw_hash = generate_password_hash(password)
+    # Lida com o upload da foto
+    foto_file = request.files.get('foto')
+    foto_filename = ''
+    if foto_file and foto_file.filename != '':
+        filename = secure_filename(foto_file.filename)
+        foto_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        foto_file.save(foto_filename)
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        # tentativa padrão (colunas minúsculas) — pode falhar se tabela usa "Nome" etc.
-        cursor.execute(
-            "INSERT INTO usuarios (nome, email, telefone, cargo, foto, senha) VALUES (%s, %s, %s, %s, %s, %s)",
-            (nome, email, telefone, cargo, foto, pw_hash)
-        )
-        conn.commit()
-    except Exception as e:
-        # limpa transação abortada antes da tentativa alternativa
-        try:
-            conn.rollback()
-        except Exception:
-            pass
-
-        try:
-            # fallback PARA SUA TABELA (colunas com inicial maiúscula e entre aspas)
-            cursor.execute(
-                'INSERT INTO "usuarios" ("Nome", "Email", "Telefone", "Cargo", "Foto", "Senha") VALUES (%s, %s, %s, %s, %s, %s)',
-                (nome, email, telefone, cargo, foto, pw_hash)
-            )
-            conn.commit()
-        except Exception as e2:
-            conn.rollback()
-            print("Erro ao inserir usuário (tentativas):", e, e2)
-            flash('Erro ao cadastrar usuário. Veja logs no console.', 'danger')
-            cursor.close()
-            conn.close()
-            return redirect('/register')
-
-    cursor.close()
-    conn.close()
-    flash('Cadastro realizado com sucesso! Faça login.', 'success')
+    register_usuarios(nome, email, telefone, cargo, foto_filename, password)
     return redirect('/')
+
 
 # ---- login (substitui comparação hardcoded) ----
 @app.route("/login", methods=["POST"])
@@ -236,43 +175,84 @@ def login():
     usuario = request.form.get("usuario", "").strip()  # pode ser nome ou e-mail
     password = request.form.get("password", "")
 
+    return login_usuarios(usuario, password)
+
+@app.route("/editar")
+def edits():
+    if 'username' not in session:
+        return redirect('/')
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    row = None
-    try:
-        cursor.execute(
-            "SELECT id, nome, senha FROM usuarios WHERE nome = %s OR email = %s",
-            (usuario, usuario)
-        )
-        row = cursor.fetchone()
-    except Exception as e:
-        # fallback para colunas que foram criadas com nomes entre aspas (ex.: "Nome")
-        try:
-            cursor.execute(
-                'SELECT "Id", "Nome", "Senha" FROM "usuarios" WHERE "Nome" = %s OR "Email" = %s',
-                (usuario, usuario)
-            )
-            row = cursor.fetchone()
-        except Exception as e2:
-            print("Erro consulta login:", e, e2)
+    if request.method == 'POST':
+        # Campos do formulário
+        nome = request.form.get('nome', '').strip()
+        email = request.form.get('email', '').strip()
+        telefone = request.form.get('telefone', '').strip()
+        cargo = request.form.get('cargo', '').strip()
+        nova_senha = request.form.get('senha', '')
+        foto_file = request.files.get('foto')
 
+        foto_filename = None
+        if foto_file and foto_file.filename != '':
+            filename = secure_filename(foto_file.filename)
+            foto_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            foto_file.save(foto_filename)
+
+        # Atualiza os dados no banco
+        try:
+            update_fields = []
+            params = []
+
+            if nome:
+                update_fields.append("nome = %s")
+                params.append(nome)
+            if email:
+                update_fields.append("email = %s")
+                params.append(email)
+            if telefone:
+                update_fields.append("telefone = %s")
+                params.append(telefone)
+            if cargo:
+                update_fields.append("cargo = %s")
+                params.append(cargo)
+            if foto_filename:
+                update_fields.append("foto = %s")
+                params.append(foto_filename)
+            if nova_senha:
+                update_fields.append("senha = %s")
+                params.append(generate_password_hash(nova_senha))
+
+            if update_fields:
+                sql = f"UPDATE usuarios SET {', '.join(update_fields)} WHERE nome = %s"
+                params.append(session['username'])
+                cursor.execute(sql, tuple(params))
+                conn.commit()
+
+                if nome:
+                    session['username'] = nome  # Atualiza na sessão também
+
+                flash("Perfil atualizado com sucesso.", "success")
+            else:
+                flash("Nenhuma alteração feita.", "info")
+
+        except Exception as e:
+            print("Erro ao atualizar perfil:", e)
+            conn.rollback()
+            flash("Erro ao atualizar perfil.", "danger")
+
+        cursor.close()
+        conn.close()
+        return redirect('/home')
+
+    # Método GET: carregar dados do usuário
+    cursor.execute("SELECT nome, email, telefone, cargo, foto FROM usuarios WHERE nome = %s", (session['username'],))
+    usuario = cursor.fetchone()
     cursor.close()
     conn.close()
 
-    if row:
-        # dependendo do driver, row pode ser tuple; adaptamos:
-        user_id = row[0]
-        nome_db = row[1]
-        pw_hash = row[2]
-        if check_password_hash(pw_hash, password):
-            session['user_id'] = user_id
-            session['username'] = nome_db
-            flash('Login realizado com sucesso.', 'success')
-            return redirect('/home')
-
-    flash('Usuário ou senha inválidos.', 'danger')
-    return render_template('index.html')
+    return render_template("editar.html", usuario=usuario)
 
 # ---- logout ----
 @app.route('/logout')

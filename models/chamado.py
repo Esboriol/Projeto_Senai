@@ -85,7 +85,7 @@ def POSTChamado(chamado_id, observacao, status, photo_path=None):
     cur.close()
     conn.close()
 
-def salvar(nome, email, ambiente, descricao, photo_path):
+def salvar_chamado(nome, email, ambiente, descricao, photo_path):
     conn = get_db_connection()
     cursor = conn.cursor()
     from datetime import datetime
