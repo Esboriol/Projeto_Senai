@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, send_from_directory
+from flask import Flask, render_template, request, send_from_directory
 from models.chamado import *   # assume get_db_connection(), get_chamados_by_status(), salvar(), POSTChamado(), ...
 from werkzeug.utils import secure_filename
 from models.usuario import *
@@ -172,21 +172,20 @@ def register():
 # ---- login (substitui comparação hardcoded) ----
 @app.route("/login", methods=["POST"])
 def login():
-    usuario = request.form.get("usuario", "").strip()  # pode ser nome ou e-mail
+    usuario = request.form.get("usuario", "").strip()
     password = request.form.get("password", "")
 
     return login_usuarios(usuario, password)
 
-@app.route("/editar")
+@app.route("/editar", methods=["GET", "POST"])
 def edits():
     if 'username' not in session:
         return redirect('/')
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor()  # cursor normal, sem argumentos
 
     if request.method == 'POST':
-        # Campos do formulário
         nome = request.form.get('nome', '').strip()
         email = request.form.get('email', '').strip()
         telefone = request.form.get('telefone', '').strip()
@@ -200,7 +199,6 @@ def edits():
             foto_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             foto_file.save(foto_filename)
 
-        # Atualiza os dados no banco
         try:
             update_fields = []
             params = []
@@ -231,7 +229,7 @@ def edits():
                 conn.commit()
 
                 if nome:
-                    session['username'] = nome  # Atualiza na sessão também
+                    session['username'] = nome  # atualiza sessão
 
                 flash("Perfil atualizado com sucesso.", "success")
             else:
@@ -246,9 +244,16 @@ def edits():
         conn.close()
         return redirect('/home')
 
-    # Método GET: carregar dados do usuário
+    # GET: pegar dados do usuário logado
     cursor.execute("SELECT nome, email, telefone, cargo, foto FROM usuarios WHERE nome = %s", (session['username'],))
-    usuario = cursor.fetchone()
+    row = cursor.fetchone()
+    usuario = None
+
+    if row:
+        # converte a tupla row em dict usando os nomes das colunas
+        cols = [desc[0] for desc in cursor.description]
+        usuario = dict(zip(cols, row))
+
     cursor.close()
     conn.close()
 

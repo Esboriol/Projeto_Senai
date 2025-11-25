@@ -79,6 +79,19 @@
   margin-left: 3%;
 }
 
+.user-actions .edit-btn {
+  display: block;
+  padding: 8px 12px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.user-actions .edit-btn:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
 .slide-content p {
   position: absolute;
   top: 25%;

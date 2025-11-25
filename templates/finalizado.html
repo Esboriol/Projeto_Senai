@@ -49,44 +49,77 @@
     </svg>
     
     <div class="card-container" id="card-container">
-        <!-- Os cards serão inseridos aqui pelo JavaScript -->
-        {% for chamado in chamados %}
-        <form action=" {{ url_for('atualizarChamado', pagina='finalizado') }}" method="POST">
 
-            <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}" />
+            {% for chamado in chamados %}
 
-            <div class="card">
-                <p>{{ chamado.descricao }}</p>
+                    <form action="{{ url_for('atualizarChamado', pagina='todos') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}">
+
+        <div class="card">
+            <div class="card-content">
+                <h1 class="editable-text">
+                    {{ chamado.descricao }}
+                    <i class="fas fa-pencil-alt edit-title-icon"></i>
+                </h1>
+
+                <!-- Seção de upload de imagem -->
+                <div class="image-upload-container">
+
+                    <div class=""> <!---->
+
+                        <!-- Exibe a imagem salva (se existir) -->
+                        {% if not chamado.Photo_path %}
+                            <input type="file"
+                                name="imagem"
+                                class="image-input"
+                                id="image-input-{{ loop.index }}"
+                                accept="image/*"
+                                style="display: none;">
+
+                            <label for="image-input-{{ loop.index }}" class="upload-button" id="upload-label-{{ loop.index }}">
+                                <i class="fas fa-camera"></i>
+                                Adicionar Imagem
+                            </label>
+
+                            <img src="#" alt="Preview da imagem" class="image-preview" id="preview-{{ loop.index }}" style="display: none;" />
+                        {% else %}
+                            <img src="{{ url_for('get_photo', filename=chamado.Photo_path) }}"
+                                 class="image-preview"
+                                 id="preview-{{ loop.index }}">
+                        {% endif %}
+
+                        <button class="delete-image-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
 
                 <div class="observacoes">
-                    <textarea style="margin-bottom: 50px;" id="observacao-{{ chamado.chamado_id }}" name="observacao"
-                        placeholder="Digite suas observações">{{ chamado.observacao}}</textarea>
+                    <textarea
+                        id="observacao-{{ loop.index }}"
+                        name="observacao"
+                        placeholder="Digite suas observações"
+                    >{{ chamado.observacao }}</textarea>
                 </div>
-                <br><br>
 
                 <div class="status-select">
-
-                    <select name="status" onchange="onSelectedCard('{{ chamado.chamado_id }}, {{ chamado.status }}')">
-                        <option id="{{chamado.chamado_id}}" value="ongoing" {% if chamado.status=='ongoing' %}selected{%
-                            endif %}>Em Andamento</option>
-                        <option id="{{chamado.chamado_id}}" value="finished" {% if chamado.status=='finished'
-                            %}selected{% endif %}>Finalizado</option>
-                        <option id="{{chamado.chamado_id}}" value="most-urgent" {% if chamado.status=='most-urgent'
-                            %}selected{% endif %}>Muito Urgente</option>
-                        <option id="{{chamado.chamado_id}}" value="urgent" {% if chamado.status=='urgent' %}selected{%
-                            endif %}>Urgente</option>
-                        <option id="{{chamado.chamado_id}}" value="common" {% if chamado.status=='common' %}selected{%
-                            endif %}>Comum</option>
-                        <option id="{{chamado.chamado_id}}" value="no-status" {% if chamado.status=='no-status'
-                            %}selected{% endif %}>Sem Status</option>
+                    <select name="status" class="status-selector" onchange="onSelectedCard('{{ loop.index }}, {{ chamado.status }}')">
+                        <option value="ongoing" {% if chamado.status=='ongoing' %}selected{% endif %}>Em Andamento</option>
+                        <option value="finished" {% if chamado.status=='finished' %}selected{% endif %}>Finalizado</option>
+                        <option value="most-urgent" {% if chamado.status=='most-urgent' %}selected{% endif %}>Muito Urgente</option>
+                        <option value="urgent" {% if chamado.status=='urgent' %}selected{% endif %}>Urgente</option>
+                        <option value="common" {% if chamado.status=='common' %}selected{% endif %}>Comum</option>
+                        <option value="no-status" {% if chamado.status=='no-status' %}selected{% endif %}>Sem Status</option>
                     </select>
-
-                    <button class="button-salvar" type="submit">Salvar</button>
                 </div>
-            </div>
 
-        </form>
-        {% endfor %}
+                <button class="button-salvar" type="submit">Salvar Alterações</button>
+            </div>
+        </div>
+    </form>
+
+            {% endfor %}
+
     </div>
   <footer class="footer">
             <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
