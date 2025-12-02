@@ -11,37 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <!-- Cabeçalho -->
-  <div class="comeco">
-  <a href="{{ url_for('home') }}">
-    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-  </a>
 
-  <h1>{{ title if title is defined else "Chamados" }}</h1>
-
-  <div class="user-wrapper">
-      {% if session.get('username') %}
-        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
-          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
-        </button>
-
-        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
-          <div class="user-info">
-            <strong>{{ session.get('username') }}</strong>
-          </div>
-          <div class="user-actions">
-            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
-          </div>
-        </div>
-
-      {% else %}
-        <div class="auth-links">
-          <a href="{{ url_for('register') }}">Registrar</a> |
-          <a href="{{ url_for('inicial') }}">Entrar</a>
-        </div>
-      {% endif %}
-    </div>
-  </div>
+  {% include 'partials/header.html' %}
 
   <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
          class="back-arrow" viewBox="0 0 24 24" fill="none"
@@ -53,41 +24,38 @@
   <main class="main-content">
     <div class="status-grid">
       <!-- Sem Status -->
-      <a href="{{ url_for('pedidosNS') }}" class="status-card no-status">
+      <a href="{{ url_for('Sem_Status') }}" class="status-card no-status">
         <span class="status-label">Sem Status</span>
       </a>
 
       <!-- Em Andamento -->
-      <a href="{{ url_for('pedidosO') }}" class="status-card in-progress">
+      <a href="{{ url_for('Em_Andamento') }}" class="status-card in-progress">
         <span class="status-label">Em Andamento</span>
       </a>
 
       <!-- Finalizados -->
-      <a href="{{ url_for('pedidosF') }}" class="status-card completed">
+      <a href="{{ url_for('Finalizados') }}" class="status-card completed">
         <span class="status-label">Finalizados</span>
       </a>
 
       <!-- Alta Urgência -->
-      <a href="{{ url_for('pedidosMU') }}" class="status-card very-urgent">
-        <span class="status-label">Alta Urgência</span>
+      <a href="{{ url_for('Muito_Urgentes') }}" class="status-card very-urgent">
+        <span class="status-label">Muito Urgentes</span>
       </a>
 
       <!-- Urgente -->
-      <a href="{{ url_for('pedidosU') }}" class="status-card urgent">
-        <span class="status-label">Urgente</span>
+      <a href="{{ url_for('Urgentes') }}" class="status-card urgent">
+        <span class="status-label">Urgentes</span>
       </a>
 
       <!-- Baixa Urgência -->
-      <a href="{{ url_for('pedidosC') }}" class="status-card common">
-        <span class="status-label">Baixa Urgência</span>
+      <a href="{{ url_for('Comuns') }}" class="status-card common">
+        <span class="status-label">Pouco Urgentes</span>
       </a>
     </div>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="footer">
-    <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
-  </footer>
+  {% include '/partials/footer.html' %}
 
   <script src="/static/js/pedidos.js"></script>
   <script src="/static/js/usu.js"></script>

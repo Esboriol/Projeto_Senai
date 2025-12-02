@@ -8,211 +8,26 @@
     <link rel="stylesheet" href="/static/css/pedidos.css">
     <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
     <link rel="stylesheet" href="/static/css/testes/top.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Manutenção - Finalizados</title>
 </head>
 
 <body>
-  <div class="comeco">
-  <a href="{{ url_for('home') }}">
-    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-  </a>
 
-  <h1>{{ title if title is defined else "Finalizados" }}</h1>
+    {% include 'partials/header.html' %}
 
-  <div class="user-wrapper">
-      {% if session.get('username') %}
-        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
-          <img src="/static/img/ps.png" alt="Ícone de usuário" class="user-icon">
-        </button>
-
-        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
-          <div class="user-info">
-            <strong>{{ session.get('username') }}</strong>
-          </div>
-          <div class="user-actions">
-            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
-          </div>
-        </div>
-
-      {% else %}
-        <div class="auth-links">
-          <a href="{{ url_for('register') }}">Registrar</a> |
-          <a href="{{ url_for('inicial') }}">Entrar</a>
-        </div>
-      {% endif %}
-    </div>
-  </div>
     <svg onclick="history.back()" xmlns="http://www.w3.org/2000/svg"
          class="back-arrow" viewBox="0 0 24 24" fill="none"
          stroke="red" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6" />
     </svg>
     
-    <div class="card-container" id="card-container">
+    {% include 'partials/pedido.html' %}
 
-            {% for chamado in chamados %}
+    {% include '/partials/footer.html' %}
 
-                    <form action="{{ url_for('atualizarChamado', pagina='todos') }}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="chamado_id" value="{{ chamado.chamado_id }}">
-
-        <div class="card">
-            <div class="card-content">
-                <h1 class="editable-text">
-                    {{ chamado.descricao }}
-                    <i class="fas fa-pencil-alt edit-title-icon"></i>
-                </h1>
-
-                <!-- Seção de upload de imagem -->
-                <div class="image-upload-container">
-
-                    <div class=""> <!---->
-
-                        <!-- Exibe a imagem salva (se existir) -->
-                        {% if not chamado.Photo_path %}
-                            <input type="file"
-                                name="imagem"
-                                class="image-input"
-                                id="image-input-{{ loop.index }}"
-                                accept="image/*"
-                                style="display: none;">
-
-                            <label for="image-input-{{ loop.index }}" class="upload-button" id="upload-label-{{ loop.index }}">
-                                <i class="fas fa-camera"></i>
-                                Adicionar Imagem
-                            </label>
-
-                            <img src="#" alt="Preview da imagem" class="image-preview" id="preview-{{ loop.index }}" style="display: none;" />
-                        {% else %}
-                            <img src="{{ url_for('get_photo', filename=chamado.Photo_path) }}"
-                                 class="image-preview"
-                                 id="preview-{{ loop.index }}">
-                        {% endif %}
-
-                        <button class="delete-image-btn">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="observacoes">
-                    <textarea
-                        id="observacao-{{ loop.index }}"
-                        name="observacao"
-                        placeholder="Digite suas observações"
-                    >{{ chamado.observacao }}</textarea>
-                </div>
-
-                <div class="status-select">
-                    <select name="status" class="status-selector" onchange="onSelectedCard('{{ loop.index }}, {{ chamado.status }}')">
-                        <option value="ongoing" {% if chamado.status=='ongoing' %}selected{% endif %}>Em Andamento</option>
-                        <option value="finished" {% if chamado.status=='finished' %}selected{% endif %}>Finalizado</option>
-                        <option value="most-urgent" {% if chamado.status=='most-urgent' %}selected{% endif %}>Muito Urgente</option>
-                        <option value="urgent" {% if chamado.status=='urgent' %}selected{% endif %}>Urgente</option>
-                        <option value="common" {% if chamado.status=='common' %}selected{% endif %}>Comum</option>
-                        <option value="no-status" {% if chamado.status=='no-status' %}selected{% endif %}>Sem Status</option>
-                    </select>
-                </div>
-
-                <button class="button-salvar" type="submit">Salvar Alterações</button>
-            </div>
-        </div>
-    </form>
-
-            {% endfor %}
-
-    </div>
-  <footer class="footer">
-            <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
-  </footer>
         <script src="/static/js/ns.js"></script>
         <script src="/static/js/usu.js"></script>
-        <script>
-            const statusColors = {
-                'ongoing': '#FFC222',
-                'finished': '#28a745',
-                'most-urgent': '#dc3545',
-                'urgent': '#ff7b07',
-                'common': '#007bff',
-                'no-status': '#6c757d'
-            };
-
-            const statusPriority = {
-                'ongoing': 1,
-                'most-urgent': 2,
-                'urgent': 3,
-                'common': 4,
-                'finished': 5,
-                'no-status': 6
-            };
-
-            // Função para ordenar os cards com base no status
-        function sortCards() {
-            const container = document.getElementById('card-container');
-            const forms = Array.from(container.querySelectorAll('form'));
-
-            const sortedForms = forms.sort((a, b) => {
-                const aStatus = a.querySelector('.status-select select').value;
-                const bStatus = b.querySelector('.status-select select').value;
-                return statusPriority[aStatus] - statusPriority[bStatus];
-            });
-
-            sortedForms.forEach(sortedForm => container.appendChild(sortedForm));
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('card-container');
-            const cards = container.querySelectorAll('.card');
-
-            cards.forEach(card => {
-                const select = card.querySelector('.status-select select');
-
-                select.style.backgroundColor = statusColors[select.value];
-
-                select.addEventListener('change', (event) => {
-                    const newStatus = event.target.value;
-                    select.style.backgroundColor = statusColors[newStatus];
-                });
-            });
-
-            sortCards();
-        });
-
-        function onSelectedCard(id, status) {
-            // setTimeout(() => {
-            //     console.log(id, status)
-            // }, 1000);
-        }                // Ordena os forms com base na prioridade do status
-                const sortedForms = forms.sort((a, b) => {
-                    const aStatus = a.querySelector('.status-select select').value;
-                    const bStatus = b.querySelector('.status-select select').value;
-                    return statusPriority[aStatus] - statusPriority[bStatus];
-                });
-
-                // Reanexa os forms ordenados ao container
-                sortedForms.forEach(sortedForm => container.appendChild(sortedForm));
-            }
-
-            // Inicializa a cor de fundo dos seletores e ordena os cards ao carregar a página
-            document.addEventListener('DOMContentLoaded', () => {
-                const container = document.getElementById('card-container');
-                const cards = container.querySelectorAll('.card');
-
-                cards.forEach(card => {
-                    const select = card.querySelector('.status-select select');
-
-                    // Define a cor de fundo do seletor com base no status atual
-                    select.style.backgroundColor = statusColors[select.value];
-
-                    // Atualiza o card quando o status for alterado
-                    select.addEventListener('change', (event) => {
-                        const newStatus = event.target.value;
-                        select.style.backgroundColor = statusColors[newStatus];
-                    });
-                });
-
-                // Ordena os cards ao carregar a página
-                sortCards();
-            });
-        </script>
+        <script src="/static/js/pedido.js"></script>
 </body>
 </html>
