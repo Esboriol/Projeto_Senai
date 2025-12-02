@@ -50,6 +50,39 @@ def register_usuarios(nome, email, telefone, cargo, foto, password):
     conn.close()
     flash('Cadastro realizado com sucesso! Faça login.', 'success')
 
+def registrar_finalizacao(chamado_id, email_funcionario):
+    conn = None
+    cursor = None
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Busca funcionario_id pelo email
+        cursor.execute("SELECT id FROM usuarios WHERE email = %s", (email_funcionario,))
+        funcionario = cursor.fetchone()
+
+        print("Registrando finalização:", chamado_id, email_funcionario)
+
+        if funcionario:
+            funcionario_id = funcionario[0]
+            cursor.execute(
+                "INSERT INTO usuarios_chamados (chamado_id, usuario_id) VALUES (%s, %s)",
+                (chamado_id, funcionario_id)
+            )
+            conn.commit()
+        else:
+            print(f"Email {email_funcionario} não encontrado na tabela funcionarios.")
+
+    except Exception as e:
+        print(f"Erro ao registrar finalização: {e}")
+        if conn:
+            conn.rollback()
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
 def login_usuarios(usuario, password):
     conn = get_db_connection()
     cursor = conn.cursor()

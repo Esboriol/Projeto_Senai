@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, jsonify
 from models.chamado import *   # assume get_db_connection(), get_chamados_by_status(), salvar(), POSTChamado(), ...
 from werkzeug.utils import secure_filename
 from models.usuario import *
@@ -10,6 +10,19 @@ app.config['UPLOAD_FOLDER'] = UPLOADS_PHOTO
 
 # SECRET_KEY para session/flash (troque para algo seguro em produção / variáveis de ambiente)
 app.secret_key = os.environ.get('SECRET_KEY', 'troque_esse_valor_em_producao')
+
+@app.context_processor
+def inject_user_data():
+    if 'username' in session:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT foto FROM usuarios WHERE nome = %s", (session['username'],))
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        foto = row[0] if row and row[0] else None
+        return dict(foto=foto)
+    return dict(foto=None)
 
 # ---- arquivos estáticos / fotos ----
 @app.route('/photos/<filename>')
@@ -46,7 +59,7 @@ def pedidos():
     return render_template("pedidos.html", chamados=chamados)
 
 @app.route("/chamados")
-def chamado():
+def Chamados():
     return render_template("chamados.html")
 
 
@@ -71,35 +84,35 @@ def home():
 
 
 @app.route("/todos")
-def todes():
+def Todos_Chamados():
     return render_template("/test/todos.html")
 
 @app.route("/tabela")
 def tabela():
     return render_template("tabela.html", chamados=get_chamados_by_status(None))
 
-@app.route('/pedidosO')
-def pedidosO():
+@app.route('/Em_Andamento')
+def Em_Andamento():
     return render_template('emAndamento.html', chamados=get_chamados_by_status('ongoing'))
 
-@app.route('/pedidosMU')
-def pedidosMU():
+@app.route('/Muito_Urgentes')
+def Muito_Urgentes():
     return render_template('muitoUrgente.html', chamados=get_chamados_by_status('most-urgent'))
 
-@app.route('/pedidosF')
-def pedidosF():
+@app.route('/Finalizados')
+def Finalizados():
     return render_template('finalizado.html', chamados=get_chamados_by_status('finished'))
 
-@app.route('/pedidosU')
-def pedidosU():
+@app.route('/Urgentes')
+def Urgentes():
     return render_template('urgente.html', chamados=get_chamados_by_status('urgent'))
 
-@app.route('/pedidosC')
-def pedidosC():
+@app.route('/Comuns')
+def Comuns():
     return render_template('comum.html', chamados=get_chamados_by_status('common'))
 
-@app.route('/pedidosNS')
-def pedidosNS():
+@app.route('/Sem_Status')
+def Sem_Status():
     return render_template('semstatus.html', chamados=get_chamados_by_status('no-status'))
 
 @app.route("/grafico")
@@ -109,6 +122,27 @@ def grafico():
 @app.route("/form")
 def form():
     return render_template("form.html")
+
+@app.route("/api/grafico_finalizados")
+def grafico_finalizados():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT u.nome, COUNT(uc.chamado_id) AS total_finalizados
+        FROM usuarios_chamados uc
+        JOIN usuarios u ON u.id = uc.usuario_id
+        GROUP BY u.nome
+        ORDER BY total_finalizados DESC;
+    """)
+
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    data = [{"nome": row[0], "total": row[1]} for row in results]
+    return jsonify(data)
+
 
 # ---- salvar chamado: integra nome do solicitante com session (se houver) ----
 @app.route("/salvarChamado", methods=["POST"])
@@ -266,33 +300,49 @@ def logout():
     flash('Desconectado.', 'info')
     return redirect('/')
 
-# ---- atualizar chamado (mantive sua lógica) ----
 @app.route("/atualizarChamado/<pagina>", methods=["POST"])
 def atualizarChamado(pagina):
-    chamadoId = request.form['chamado_id']
-    observacao = request.form['observacao']
-    status = request.form['status']
-    imagem = request.files.get('imagem')
+    chamadoId = request.form.get("chamado_id")
+    observacao = request.form.get("observacao", "")
+    status = request.form.get("status", "no-status")
+    email_finalizador = request.form.get("email_finalizador", "").strip()
+    print("FORM:", request.form)
+
+    # Upload de imagem (se houver)
+    imagem = request.files.get("imagem")
     image_path = None
-    if imagem and imagem.filename != '':
+    if imagem and imagem.filename:
         filename = secure_filename(imagem.filename)
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         imagem.save(image_path)
+
+    # Atualiza chamado na tabela principal
     POSTChamado(chamadoId, observacao, status, image_path)
-    if pagina == 'todos':
+
+    # Se finalizado e email informado, registra na tabela de relacionamento
+    if status == "finished" and email_finalizador:
+        registrar_finalizacao(chamadoId, email_finalizador)
+
+    # Redireciona conforme página
+    if pagina == "todos":
         return redirect("/pedidos")
-    elif pagina == 'andamento':
-        return redirect("/pedidosO")
-    elif pagina == 'comum':
-        return redirect("/pedidosC")
-    elif pagina == 'finalizado':
-        return redirect("/pedidosF")
+    elif pagina == "andamento":
+        return redirect("/Em_Andamento")
+    elif pagina == "comum":
+        return redirect("/Comuns")
+    elif pagina == "finalizado":
+        return redirect("/Finalizados")
     elif pagina == "muitoUrgente":
-        return redirect("/pedidosMU")
+        return redirect("/Muito_Urgentes")
     elif pagina == "semStatus":
-        return redirect("/pedidosNS")
+        return redirect("/Sem_Status")
     elif pagina == "urgente":
-        return redirect("/pedidosU")
+        return redirect("/Urgentes")
+    else:
+        # fallback: volta para lista geral
+        return redirect("/pedidos")
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
