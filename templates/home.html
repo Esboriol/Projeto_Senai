@@ -6,46 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="stylesheet" href="/static/css/testes/teste.css">
-  <link rel="stylesheet" href="/static/css/testes/top.css">
+
   <link rel="icon" type="image/x-icon" href="/static/img/senai-favicon.jpg">
-  <link rel="stylesheet" href="/static/css/header-footer.css">
 </head>
-  <div class="comeco">
-  <a href="{{ url_for('home') }}">
-    <img src="/static/img/senai_logo.png" alt="Logo SENAI" class="logo">
-  </a>
 
-  <h1>{{ title if title is defined else "Home" }}</h1>
-
-  <div class="user-wrapper">
-      {% if session.get('username') %}
-        <button id="userBtn" class="user-button" aria-haspopup="true" aria-expanded="false" title="Menu do usuário">
-          <img src="{{ url_for('get_photo', filename=foto.replace('photos/', '')) if foto else '/static/img/ps.png' }}" alt="Foto do usuário" class="user-icon">
-        </button>
-        <div id="userMenu" class="user-menu" role="menu" aria-hidden="true">
-          <div class="user-info">
-            <strong>{{ session.get('username') }}</strong>
-          </div>
-          <div class="user-actions">
-            <a href="{{ url_for('edits') }}" class="edit-btn">Editar Perfil</a>
-            <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
-          </div>
-        </div>
-
-      {% else %}
-        <div class="auth-links">
-          <a href="{{ url_for('register') }}">Registrar</a> |
-          <a href="{{ url_for('inicial') }}">Entrar</a>
-        </div>
-      {% endif %}
-    </div>
-  </div>
+  {% include 'partials/header.html' %}
 
 <body>
   <div class="carousel">
    <div class="carousel-track">
   <div class="slide">
-    <a href="{{ url_for('chamado') }}">
+    <a href="{{ url_for('Chamados') }}">
       <div class="slide-content">
         <img src="/static/img/sl1.png" alt="Imagem 1">
         <p>Chamados</p>
@@ -53,7 +24,7 @@
     </a>
   </div>
   <div class="slide">
-    <a href=" {{ url_for('todes') }}">
+    <a href=" {{ url_for('Todos_Chamados') }}">
       <div class="slide-content">
         <img src="/static/img/sl2.png" alt="Imagem 2">
         <p>Todas os Chamados</p>
@@ -79,9 +50,7 @@
     </div>
   </div>
 
-  <footer class="footer">
-            <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
-  </footer>
+  {% include '/partials/footer.html' %}
 
   <script src="/static/js/testes/teste.js"></script>
   <script src="/static/js/usu.js"></script>
