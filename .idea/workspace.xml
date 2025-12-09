@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68915dc-0077-47d1-9a87-f23b214b0542" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/EmAndamento.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/EmAndamento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chamados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chamados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comum.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/editar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/finalizado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/finalizado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/grafico.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/grafico.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/muitoUrgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/muitoUrgente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/pedido.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/pedido.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/semstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/semstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tabela.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tabela.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/urgente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/urgente.html" afterDir="false" />
-    </list>
+    <list default="true" id="b68915dc-0077-47d1-9a87-f23b214b0542" name="Changes" comment="" />
     <list id="ccf3edaf-05ac-4f93-9da8-6583313a1ed7" name="Changes by DEV_4" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
